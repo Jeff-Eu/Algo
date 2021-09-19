@@ -1,0 +1,115 @@
+{
+  "main": {
+    "id": "67d8ec2c69b9971b",
+    "type": "split",
+    "children": [
+      {
+        "id": "d1877c7a3a6bc201",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Leetcode/1011 Capacity To Ship Packages Within D Days.md",
+            "mode": "source"
+          }
+        },
+        "group": "6e1db41ce363a668"
+      },
+      {
+        "id": "a4275b15af43f548",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Leetcode/1011 Capacity To Ship Packages Within D Days.md",
+            "mode": "preview"
+          }
+        },
+        "group": "6e1db41ce363a668"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4e6ede73eabfbc77",
+    "type": "split",
+    "children": [
+      {
+        "id": "7c05666957924d44",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7b9f5dabfbda2866",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "5e12c9dbf8716e6d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 243
+  },
+  "right": {
+    "id": "7a1e22fea0e38fa3",
+    "type": "split",
+    "children": [
+      {
+        "id": "d0d9c6cd14728e79",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bebb2c197182df07",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Leetcode/1011 Capacity To Ship Packages Within D Days.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 100,
+    "collapsed": true
+  },
+  "active": "d1877c7a3a6bc201",
+  "lastOpenFiles": [
+    "Leetcode/1011 Capacity To Ship Packages Within D Days.md",
+    "Leetcode/986_Interval List Intersections.md",
+    "Leetcode/3_Longest Substring Without Repeating Characters.md",
+    "Other/Finding Sublist.md",
+    "Leetcode/92 Reverse Linked List II.md",
+    "Leetcode c7bdf835c118429389623484f979fbfc/1011 Capacity To Ship Packages Within D Days.md",
+    "Leetcode c7bdf835c118429389623484f979fbfc/1011 Capacity To Ship Packages Within D Days eeae24f1d2554859ac3b20980dd162e1/2021-04-17_221724.png",
+    "Leetcode c7bdf835c118429389623484f979fbfc/1011 Capacity To Ship Packages Within D Days eeae24f1d2554859ac3b20980dd162e1/2021-04-15_204940.png",
+    "Leetcode c7bdf835c118429389623484f979fbfc/1011 Capacity To Ship Packages Within D Days eeae24f1d2554859ac3b20980dd162e1/1101.png",
+    "Leetcode c7bdf835c118429389623484f979fbfc/437 Path Sum III 9ced23f09aeb4d1996c610c7db9f88c3/437.png"
+  ]
+}

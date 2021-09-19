@@ -1,0 +1,276 @@
+.theme-light {
+    --background-primary: #dddbc7;
+    --background-primary-alt: #fb88d221;
+    --background-secondary: #dddbc7;
+    --background-secondary-alt: rgba(0, 0, 0, 0.1);
+    --background-accent: #e6eff4;
+    --background-modifier-border: rgba(0, 0, 0, 0.1);
+    --background-modifier-form-field: #fbf0d2;
+    --background-modifier-form-field-highlighted: #e6eff4;
+    --background-modifier-box-shadow: rgba(0, 0, 0, 0.1);
+    --background-modifier-success: #fbf0d2;
+    --text-normal: #000000;
+    --text-muted: #4c5064;
+    --text-faint: #4c5064;
+}
+
+.theme-light .cm-s-obsidian pre.HyperMD-codeblock, .theme-light .cm-s-obsidian span.cm-inline-code, .theme-light .cm-s-obsidian span.cm-math:not(.cm-formatting-math-begin):not(.cm-formatting-math-end), .theme-light .markdown-preview-view code{
+    color: var(--text-muted);
+    font-size: 0.93em !important;
+    /* font-family: var(--font-family-preview-edit-code); */
+    text-align: start;
+    line-height: 1.4em !important; 
+}
+
+/* Code */
+.theme-light :not(pre) > code[class*="language-"],
+.theme-light pre[class*="language-"] {
+    /* 調比白色還暗一點 */
+    background-color: var(--background-accent);
+    /* 代码块 圆角 阴影 */
+    /* border-radius: 6px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: rgb(0 0 0/15%) 0px 2px 10px; */
+}
+
+.theme-dark {
+    --background-primary: #353231;
+    --background-primary-alt: #00767224;
+    --background-secondary: #383433;
+    --background-secondary-alt: #353231;
+    --background-accent: #786b54;
+    --background-modifier-border: rgba(0, 0, 0, 0.1);
+    --background-modifier-form-field: #007672;
+    --background-modifier-form-field-highlighted: rgba(0, 0, 0, 0.22);
+    --background-modifier-box-shadow: rgba(0, 0, 0, 0.3);
+    --background-modifier-success: #E1B87F;
+    --background-modifier-error: #007672;
+    --background-modifier-error-rgb: 155,67,67;
+    --background-modifier-error-hover: #D1CCBD;
+    --background-modifier-cover: rgba(0, 0, 0, 0.6);
+    --text-accent: #E1B87F;
+    --text-accent-hover: #786b54;
+    --text-normal: #a29c90;
+    --text-muted: #a29c90;
+    --text-faint: rgb(121, 121, 121);
+    --accent-strong: #786b54;
+    --text-em-color: #E1B87F;
+    --text-error: #007672;
+    --text-error-hover: #E1B87F;
+    --text-highlight-bg: #D1CCBD;
+    --text-selection: #EFDBB2;
+    --text-on-accent: #E1B87F;
+    --interactive-normal: #007672;
+    --interactive-hover: #E1B87F;
+    --interactive-accent: #007672;
+    --interactive-accent-rgb: 45, 135, 211;
+    --interactive-accent-hover: #E1B87F;
+    --panel-border-color: #353231;
+    --search-text: #007672;
+    --folder-title: #007672;
+    --mark-highlight: #007672;
+    --background-search-result: #786b54;
+    --gray-1: #353231;
+    --gray-2: #786b54;
+    --red: #f97065;
+    --red-1: #ff4a4a;
+    --orange: #f9944c;
+    --green: #0f9d58;
+    --darkgreen: #007672;
+    --aqua: #61C8B9;
+    --purple: #ab7fe6;
+    --blue: #198cff;
+    --darkblue: #007aff;
+    --yellow: #f7dc01;
+    --light-yellow: #E1B87F;
+    --embed-color: #786b540d;
+    --search-result-file-title-color: #007672;
+    --theme-color: #E1B87F;
+    --theme-color-translucent: #007672;
+    --theme-color-translucent-1: #007672;
+    --color-specification: #E1B87F;
+    --allow-1: #E1B87F;
+    --background-blockquote-dark: #786b540d;
+    --list-ul-block-color: #007672;
+    --list-ul-disc-color: #E1B87F;
+    --list-ul-hover: #EFDBB2;
+    --list-ol-block-color: #a29c90;
+    --list-ol-number-color: #a29c90;
+    --list-ol-hover: #007672;
+    --tag1: #007672;
+    --tag2: #786b54;
+    --tag3: #aa7f39cc;
+    --tag4: #3C4855;
+    --tag5: #674712;
+    --tag6: #60616f;
+    --tag7: #7f7272;
+    --tag8: #2F3546;
+    --tag9: #393c44;
+    --h1-color: #D1CCBD;
+    --h2-color: #D1CCBD;
+    --h3-color: #D1CCBD;
+    --h4-color: #D1CCBD;
+    --h5-color: #D1CCBD;
+    --h6-color: #D1CCBD;
+    --graph-text-color: #a29c90;
+    --graphtag: #007672;
+    --graph-attach: #E1B87F;
+    --graph-circle: #EFDBB2;
+    --graph-line: #E1B87F;
+    --graph-unresolved: #E1B87F;
+    --graph-arrow: #EFDBB2;
+    --mermaid-active-task-color: #007672;
+    --mermaid-seq-dia-color: #E1B87F;
+    --table-background-color: #353231;
+    --table-background-color-odd: #353231;
+    --table-border-color: #c0c0c0;
+    --table-thead-background-color: #786b54;
+    --table-hover-raw-color: #353231;
+    --table-hover-color: #efdbb217;
+    --table-hover-thead-color: #efdbb2e3;
+    --calendar-week-color: #E1B87F;
+    --calendar-week-hover: #786b54;
+    --calendar-week-background-color: #007672;
+    --day-planner-pie: #007672;
+    --day-planner-timeline: #269894;
+    --day-planner-line: #786b54;
+    --day-planner-dot: #786b54;
+    --day-planner-item-hover: #EFDBB2;
+    --event-item-color1: #007672;
+    --event-item-color2: #136664;
+    --event-item-color3: #105553;
+    --event-item-color4: #0D4a48;
+    --event-item-color5: #0b3f3d;
+    --event-item-color6: #093634;
+    --event-item-color7: #0b3f3d;
+    --event-item-color8: #0D4a48;
+    --event-item-color9: #105553;
+    --event-item-color10: #136664;
+    --note-important: #007672;
+    --note-cloze: #E1B87F;
+    --stickies-color-1: #007672;
+    --stickies-color-2: #E1B87F;
+    --tape-color: #007672;
+    --header-color: #f1a634d0;
+}
+
+.theme-dark .cm-s-obsidian pre.HyperMD-codeblock, .theme-dark .cm-s-obsidian span.cm-inline-code, .theme-dark .cm-s-obsidian span.cm-math:not(.cm-formatting-math-begin):not(.cm-formatting-math-end), .theme-dark code{
+    color: #A29C90;
+    font-size: 0.93em !important;
+    /* font-family: var(--font-family-preview-edit-code); */
+    text-align: start;
+    line-height: 1.4em !important; 
+}
+
+.theme-dark code[class*="language-"],
+.theme-dark pre[class*="language-"] {
+    color: #D1CCBD !important;
+    text-shadow: none;
+    /* font-family: var(--mono-font), var(--cjk-font); */
+}
+
+/*show language type in preview mode*/ 
+/*Thanks to elutao from https://snippets.cacher.io/snippet/018387c872dc39277996 */
+/* pre通用相对css */
+pre:before{
+    font-family: var(--default-font);
+    color: #6b7f94;
+    opacity: 0.7;
+    font-size: 15px;
+    font-weight: 600;
+    position: absolute;
+    right: 30px;
+    top: 0.2em;
+  }
+   
+/* 显示当前代码块的语言类别 */
+pre {
+position: relative;
+}
+
+/* 每个语言单独写 C语言 要写在前面 否则出现覆盖C# C++的问题 */
+pre[class*='language-c']:before {
+    content: "C";
+}
+
+pre[class*='language-py']:before {
+    content: "Python";
+}
+
+pre[class*='language-python']:before {
+    content: "Python";
+}
+
+pre[class*='language-nginx']:before {
+    content: "Nginx";
+}
+
+pre[class*='language-css']:before {
+    content: "Css";
+}
+
+pre[class*='language-javascript']:before {
+    content: "Js";
+}
+
+pre[class*='language-js']:before {
+    content: "Js";
+}
+
+
+pre[class*='language-php']:before {
+    content: "Php";
+}
+
+pre[class*='language-shell']:before {
+    content: "Shell";
+}
+
+pre[class*='language-flow']:before {
+    content: "Flow";
+}
+
+pre[class*='language-sequence']:before {
+    content: "Sequence";
+}
+
+pre[class*='language-sql']:before {
+    content: "Sql";
+}
+
+pre[class*='language-yaml']:before {
+    content: "Yaml";
+}
+
+pre[class*='language-ini']:before {
+    content: "ini";
+}
+
+pre[class*='language-xml']:before {
+    content: "Xml";
+}
+
+pre[class*='language-git']:before {
+    content: "Git";
+}
+
+pre[class*='language-cs']:before {
+    content: "C#";
+}
+
+pre[class*='language-cpp']:before {
+    content: "C++";
+}
+
+pre[class*='language-java']:before {
+    content: "Java";
+}
+
+pre[class*='language-html']:before {
+    content: "Html";
+}
+
+pre[class*='language-txt']:before {
+    content: "txt";
+}
