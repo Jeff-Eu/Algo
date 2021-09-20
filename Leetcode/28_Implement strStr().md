@@ -1,7 +1,4 @@
-28. Implement strStr()
-
-Easy
-
+# 28. Implement strStr()
 Implement [strStr()](http://www.cplusplus.com/reference/cstring/strstr/).
 
 Return the index of the first occurrence of needle in haystack, or `-1` if `needle` is not part of `haystack`.
@@ -85,3 +82,5 @@ class Solution(object):
             #     return i
         return -1
 ```
+
+#Easy
