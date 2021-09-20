@@ -52,7 +52,7 @@ class Solution(object):
         return count
 ```
 
-* 去看詳解的 Approach #3: Expand Around Possible Centers ，就能比較快回想起來較好的解法。
+去看詳解的 Approach #3: Expand Around Possible Centers ，就能比較快回想起來較好的解法。
 
 複雜度: O(N^2)
 

@@ -45,3 +45,6 @@ This is identical to finding substrings in a string, so for large lists it may b
 
 ## Learned
 - Remember the art of the code.
+
+## Extended
+- 應用至: [[28_Implement strStr()]]
