@@ -31,7 +31,7 @@ Output: false
 
 這邊有個小技巧是python slicing的寫法超過index並不會跳error，只會回傳子陣列或子字串，如此寫法變得更精簡。
 
-<img src="imgs\139_1.jpg" alt="drawing" width="300"/>
+<img src="imgs/139_1.jpg" alt="drawing" width="300"/>
 
 ```python
 """

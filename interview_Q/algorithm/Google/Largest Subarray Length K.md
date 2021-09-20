@@ -1,7 +1,7 @@
 # [Rookie][Intern] Largest Subarray Length K
 
 Q:
-![img](..\imgs\Google.Largest_Subarray_Length_K.png)
+![](imgs/Google_Largest_Subarray_Length_K.png)
 Intern題都是超級簡單的程式基礎題
 
 Ans:

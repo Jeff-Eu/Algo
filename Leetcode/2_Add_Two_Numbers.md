@@ -12,7 +12,7 @@ Explanation: 342 + 465 = 807.
 
 # Explain
 這題是考大數相加，只要快速看懂下圖就能寫得出來
-![2 add two nums](imgs\2_add_two_nums.jpg)
+![2 add two nums](imgs/2_add_two_nums.jpg)
 
 # Solution
 Jeff's second practice

@@ -3,7 +3,7 @@ Q: Given a string containing digits from 2-9 inclusive, return all possible lett
 
 A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
 
-![src](imgs\17_1.png)
+![src](imgs/17_1.png)
 
 Example:
 ```

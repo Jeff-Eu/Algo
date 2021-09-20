@@ -14,8 +14,8 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 
 ## Answer
 這題在Leetcode有詳解，主要是這兩張圖的解釋
-![img1](imgs\31_nums_graph.png)
-![img2](imgs\31_Next_Permutation.gif)
+![img1](imgs/31_nums_graph.png)
+![img2](imgs/31_Next_Permutation.gif)
 
 Jeff's (看過解答後)
 ```python

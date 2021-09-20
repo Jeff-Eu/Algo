@@ -3,7 +3,7 @@ Q: On an alphabet board, we start at position (0, 0), corresponding to character
 
 Here, board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"], as shown in the diagram below.
 
-![1138](imgs\1138.png)
+![1138](imgs/1138.png)
 
 We may make the following moves:
 

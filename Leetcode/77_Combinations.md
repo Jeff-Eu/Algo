@@ -95,7 +95,7 @@ class Solution(object):
 ```
 番外數學篇：\
 從上面程式發現數學公式並證明之\
-![](imgs\77_1.png =360x)
+![](imgs/77_1.png)
 
 解二:
 

@@ -14,7 +14,7 @@ Output:  [1,2,4,7,5,3,6,8,9]
 
 Explanation:
 
-![](imgs\498.png)
+![](imgs/498.png)
 
 ## Answer
 

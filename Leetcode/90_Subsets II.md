@@ -99,7 +99,7 @@ class Solution(object):
 ```
 
 另外論譠有用iterative的解法，用到類似 15. 3sum 判斷重覆的方法，並改良了 78. Subsets 的 Cascading Approach，再參考下圖示意就懂code的邏輯了。
-![](imgs\90_1.png)
+![](imgs/90_1.png)
 ```python
 class Solution:
     def subsetsWithDup(self, nums):

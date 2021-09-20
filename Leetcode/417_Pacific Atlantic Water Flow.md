@@ -24,7 +24,7 @@ Given the following 5x5 matrix:
 ```
 Return:
 
-[[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (positions with parentheses in above matrix).
+[ [0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0] ] (positions with parentheses in above matrix).
 
 ## Answer
 想到 bottom-up的 DP 解法後，約在 20分內寫出
