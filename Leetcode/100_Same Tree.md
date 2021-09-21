@@ -151,3 +151,8 @@ bool isSameTree(struct TreeNode* p, struct TreeNode* q){
     return isTrue;
 }
 ```
+
+## Related
+這題算是 572_Subtree of Another Tree 的簡化版。
+
+#Easy 

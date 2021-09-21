@@ -46,5 +46,5 @@ This is identical to finding substrings in a string, so for large lists it may b
 ## Learned
 - Remember the art of the code.
 
-## Extended
-- 應用至: [[28_Implement strStr()]]
+## Related
+- 應用至: [[28_Implement strStr()]], [[572_Subtree of Another Tree]]

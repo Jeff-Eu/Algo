@@ -37,17 +37,18 @@ Given tree t:
 Return false.
 
 ## Answer
+- 這裡我利用了語言內建的substring函式(參考Finding Sublist [反向連結]提到的 Boyer-Moore演算法)，因為它有名人的快速算法，透過它，這題速度才有快一些。
 
 花了約45分才寫正確，比詳解的還好，想法是想將樹用字串表示，再去比較t字串是否為 s字串的子字串，以下是答對前採到的陷阱：
 * 一開始選擇用 inorder 的方式，結果被特殊 test input 檢查出是錯的！早知道函式就不要命名成 inorder XD，就命名成 dfs 就好，
 * 字串比較錯誤：
-    * 不能單純在 dfs 內將字串用 += 的方式最後輸出，否則像 2# 也會是 12# 的子字串，所以必須用 list 去存，最後再轉成字串去比較
-    * 還有一種例外，就算最後將 list 轉成字串，下面第二行也會被判斷成第一行的子字串
+    * 不能單純在 dfs 內將字串用 += 的方式最後輸出，否則像 2# 也會是 12# 的子字串，解法:
+        * 一種是用 list 去存，再用一個分隔字元搭配 String.join(myList) 轉成字串再去比較，但這會產生另一種例外，下面第二行也會被判斷成第一行的子字串
         ```
         12 # #
         2 # #
         ```
-        要避免這種情形就是字串前面要先加個分隔字元(這裡是空白)，原理是讓第一個讀進去的 node 前面也要有個分隔字元，像 _node.val_ 就代表一個真正獨立的node值，才不會混淆進不同的 node 值
+        要避免這種情形就是字串前面也要先加分隔字元(這裡是空白)，就能獨立每個node的數值不跟其他數值產生子字串關係；上面node 2就不會變成node 12的子字串
 
 ```python
 # Runtime: 60 ms, faster than 96.51% of Python online submissions for Subtree of Another Tree.
@@ -102,3 +103,48 @@ class Solution(object):
             s[0] += "b"
             print s[0] # ab
             ```
+
+C++版本
+```c++
+// Runtime: 24 ms, faster than 60.24% of C++ online submissions for Subtree of Another Tree.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    void dfs(TreeNode* node, string& s) {
+        if(node == NULL) {
+            s += "# ";
+            return;
+        }
+        s += std::to_string(node->val) + " ";
+        dfs(node->left, s);
+        dfs(node->right, s);
+    }
+    
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        
+        string s1 = " ";
+        string s2 = " ";
+        
+        dfs(root, s1);
+        dfs(subRoot, s2);
+        return s1.find(s2) != std::string::npos;
+        
+    }
+};
+```
+
+## Related
+這題的解法可用來解 [[100_Same Tree]]
+
+#Easy

@@ -179,3 +179,7 @@ for i in xrange(3):
 		else:
 			p = (a, b, c+j)
 ```
+
+- [else clause on the for statement](http://docs.python.org/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops)
+	- Loop statements may have an `else` clause; it is executed when the loop terminates through exhaustion of the iterable (with [`for`](https://docs.python.org/3/reference/compound_stmts.html#for)) or when the condition becomes false (with [`while`](https://docs.python.org/3/reference/compound_stmts.html#while)), but not when the loop is terminated by a [`break`](https://docs.python.org/3/reference/simple_stmts.html#break) statement.
+	- E.g. [[Finding Sublist]]
