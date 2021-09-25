@@ -26,7 +26,11 @@ You may assume the interval's end point is always bigger than its start point.
 Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
 
 ## Answer
-以下代碼的註解參考了[高手解](https://leetcode-cn.com/problems/non-overlapping-intervals/solution/wu-zhong-die-qu-jian-ji-bai-liao-100de-y-kkzr/)，比官網解還好
+以下代碼的註解參考了[高手解](https://leetcode-cn.com/problems/non-overlapping-intervals/solution/wu-zhong-die-qu-jian-ji-bai-liao-100de-y-kkzr/)，比官網解還好。
+
+Sorting Interval[0] in ascending order is O(nlogn), then traversing intervals array is O(n). Total is O(nlogn).
+
+為什麼要先排序？可先參考 57_Insert_interval[反向連結]解說交集聯集的定理
 
 ```python
 class Solution(object):
@@ -56,6 +60,8 @@ class Solution(object):
         return c
 ```
 
+複雜度：
+
 c++版本
 ```cpp
 bool comp(vector<int> &a,vector<int> &b) {
@@ -83,7 +89,9 @@ public:
 };
 ```
 
-論譠還有一個解法(C++)是用end先排序，可能更好
+論譠還有一個解法(C++)是用end先排序，感覺也不錯
+Actually, the problem is the same as "Given a collection of intervals, find the maximum number of intervals that are non-overlapping." (the classic Greedy problem: [Interval Scheduling](https://en.wikipedia.org/wiki/Interval_scheduling#Interval_Scheduling_Maximization)). 
+
 ```cpp
 bool comp(vector<int> &a,vector<int> &b) {
 	return a[1]<b[1];
@@ -107,6 +115,5 @@ public:
 };
 ```
 
-為什麼要先排序？可先參考 57_Insert_interval[反向連結]解說交集聯集的定理
 
 #medium
