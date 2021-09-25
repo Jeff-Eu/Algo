@@ -190,3 +190,6 @@ class Solution(object):
         result.append(newInterval)
         return result
 ```
+
+# Related
+延伸題: [[435_Non-overlapping Intervals]]

@@ -55,3 +55,58 @@ class Solution(object):
                 
         return c
 ```
+
+c++版本
+```cpp
+bool comp(vector<int> &a,vector<int> &b) {
+	return a[0]<b[0];
+}
+
+class Solution {
+public:
+	int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+		int ans=0;      
+		if(intervals.size()==0) return 0;
+		// You can also ignore the comp in this case.
+		sort(intervals.begin(),intervals.end(),comp); 
+		int end = intervals[0][1];
+
+		for(int i=1; i<intervals.size(); i++) {
+			if(end > intervals[i][0]) {
+				ans++;
+                end = min(intervals[i][1], end);
+			}else 
+                end = intervals[i][1];
+		}
+		return ans;    
+	}
+};
+```
+
+論譠還有一個解法(C++)是用end先排序，可能更好
+```cpp
+bool comp(vector<int> &a,vector<int> &b) {
+	return a[1]<b[1];
+}
+class Solution {
+public:
+	int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+		int ans=-1;      
+		if(intervals.size()==0) return 0;       
+		//custom comperator is used.
+		sort(intervals.begin(),intervals.end(),comp); 
+		vector<int> prev= intervals[0];
+
+		for(vector<int> i: intervals) {
+			if(prev[1]>i[0]) {
+				ans++; //we dont update previous, because i[1] will be grater then prev[1]
+			}else prev=i; // we want the end point to be minimum
+		}
+		return ans; //ans was initially made -1 because our prev and intervals[0] will always match
+	}
+};
+```
+
+為什麼要先排序？可先參考 57_Insert_interval[反向連結]解說交集聯集的定理
+
+#medium
