@@ -22,6 +22,35 @@ NOTE: input types have been changed on April 15, 2019. Please reset to default c
 * 跑迴圈去比較是否有重疊
 
 ## Answer
+c++參考首刷
+```cpp
+// Runtime: 8 ms, faster than 99.93% of C++ online submissions for Merge Intervals.
+bool comp(vector<int>& a, vector<int>& b) {
+    return a[0] < b[0];
+}
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end(), comp);
+        
+        vector<vector<int>> merged;
+        for(auto& v : intervals) {
+            if(merged.empty() == false && merged.back()[1] >= v[0]) {
+                merged.back()[1] = max(v[1], merged.back()[1]);
+            }else
+                merged.push_back(v);
+        }
+        
+        return merged;
+    }
+};
+```
+Ref: 
+* [C++ auto& vs auto](https://stackoverflow.com/questions/29859796/c-auto-vs-auto)
+* [C++ 程式語言 auto 自動變數類型語法教學與範例](https://blog.gtwang.org/programming/cpp-auto-variable-tutorial/)
+
+Complexity: O(N*Log(N))
+
 Jeff's 二刷 (better and easier)
 ```python
 class Solution(object):
@@ -187,3 +216,9 @@ var merge = function(intervals) {
     return result;
 };
 ```
+
+# Relation
+進階->[[57_Insert_interval]]
+
+
+#medium
