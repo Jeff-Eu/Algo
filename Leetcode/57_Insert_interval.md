@@ -108,7 +108,9 @@ class Solution:
 ```
 
 \
-另外參考論譠的改良了"合併區間解"的寫法，使用bisect.insort就可以不用再排序，將速度降到 O(N)
+另外參考論譠的改良了"合併區間解"的寫法，因為這裡的intervals已經先排序過，要插入的新區間只要使用bisect.insort就可以不用再排序，將速度降到 O(N)
+
+> 對於已排序過的 list，可使用二元搜尋法插入新項目，Python的語法是 bisect.insort(list, new_item)
 ```python
 class Solution(object):
     def insert(self, intervals, newInterval):
@@ -135,6 +137,38 @@ Jeff's 二刷 (better to remember)
 這題在Leetcode屬於hard，但它的姊妹題 No.56 只有 medium，如果會解 No.56，就可以用 No.56的答案來reuse解出這題，就變得很簡單了
 
 Time: O(NlogN)
+
+C++
+```cpp
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        
+        // 法一： 複雜度 O(N*Log(N))
+        // intervals.push_back(newInterval);        
+        // sort(intervals.begin(), intervals.end());
+
+        // 法二: Binary Search 插入，複雜度降到 O(N)
+        intervals.insert
+        ( 
+            std::upper_bound( intervals.begin(), intervals.end(), newInterval ),
+            newInterval 
+        );
+        
+        vector<vector<int>> merged;
+        for(auto& interval: intervals) {
+            if(!merged.empty() && merged.back()[1] >= interval[0])
+                merged.back()[1] = max(merged.back()[1], interval[1]);
+            else
+                merged.push_back(interval);            
+        }
+        
+        return merged;
+    }
+};
+```
+
+Python
 ```python
 class Solution(object):
     def insert(self, intervals, newInterval):
