@@ -149,6 +149,7 @@ public:
         // sort(intervals.begin(), intervals.end());
 
         // 法二: Binary Search 插入，複雜度降到 O(N)
+        //  Ref: https://stackoverflow.com/questions/15843525/how-do-you-insert-the-value-in-a-sorted-vector 
         intervals.insert
         ( 
             std::upper_bound( intervals.begin(), intervals.end(), newInterval ),
