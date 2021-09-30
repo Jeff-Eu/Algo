@@ -28,7 +28,7 @@ Output: [[3,1],[4,2]]
 
 * 兩次的鏡射變換會合成一次的旋轉變換
 	* ref: https://highscope.ch.ntu.edu.tw/wordpress/?p=51374
-	* 觀念：旋轉角若為 2*(alpha-beta) = 先對 beta 鏡射再對 alpha 鏡射 
+	* 觀念：旋轉角若為 2*(alpha-beta) 即等於，先對 beta 鏡射再對 alpha 鏡射 
 	* 推移變換會改變幾何圖形的形狀，但不改變其面積
 		* 線性變換的面積比
 			* ref: http://highscope.ch.ntu.edu.tw/wordpress/?p=51317
@@ -36,6 +36,8 @@ Output: [[3,1],[4,2]]
 				* ref: https://highscope.ch.ntu.edu.tw/wordpress/?p=66359
 
 * 新技能：會寫此程式也能學會將一個矩陣的所有元素針對角線做鏡射的程式寫法
+> 補充：有時候時間久了會忘記這個數學公式跟它的含意，甚至還會懷疑角度是要順時針還是逆時針，其實順逆時針在這題完全沒影響，記得不需擔心這點。  
+
 * 看完詳解以及自己去找數學資料後首刷約 13分
 
 ```python
@@ -81,3 +83,32 @@ class Solution(object):
             for j in xrange(i):
                 arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
 ```
+
+C++
+速度贏過的比例不高，不過這方法類似詳解，還是可以接受的。
+```cpp
+// Runtime: 4 ms, faster than 54.69% of C++ online submissions for Rotate Image.
+class Solution {
+public:
+    
+    void rotate(vector<vector<int>>& matrix) {
+        
+        int sz = matrix.size();
+        for(int i=0; i<sz-1; i++)
+            for(int j=0; j<sz-i; j++)
+                swap(matrix[i][j], matrix[sz-j-1][sz-i-1]);
+        
+        // int halfSz = sz/2; 
+        // for(int i=0; i<halfSz; i++) {
+        //     vector<int> tmp;
+        //     tmp = matrix[i];
+        //     matrix[i] = matrix[sz-i-1];
+        //     matrix[sz-i-1] = tmp;
+        // }
+		// 下面這行的寫法可直接取代上面連續註解的那幾行
+        reverse(matrix.begin(), matrix.end());
+    }
+};
+```
+
+#medium
