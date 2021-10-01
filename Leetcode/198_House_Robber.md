@@ -55,6 +55,11 @@ class Solution(object):
         return out
 ```
 
+2021/10/1的複刷心得：
+- 因為dp公式會用到前面兩個值，所以迴圈的 i 才會從 2開始；注意 `size == 1`及 `size == 2`都必須先額外過濾。
+- `max(nums[0], nums[1])`被引用了兩次，寫起來是有點累贅，除非是將 `last`跟 `last2`放在前面宣告，否則就勇敢地硬寫兩次吧！
+
+
 二刷(約40分，沒看解答) (Bottom up - Recursive DP)
 ```python
 # Runtime: 212 ms, faster than 5.80% of Python online submissions for House Robber.
@@ -125,3 +130,34 @@ class Solution(object):
                 isMaxHasLast = True
         return maxi
 ```
+
+2021/10/1
+cpp刷
+```cpp
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        
+        int sz = nums.size();
+        if(sz == 1)
+            return nums[0];
+        else if(sz == 2)
+            return max(nums[0], nums[1]);
+        
+        int ans, pre, pre2;
+        pre = max(nums[0], nums[1]);
+        pre2 = nums[0];
+        for(int i=2; i<sz; i++) {
+            ans = max(pre, pre2 + nums[i]);
+            pre2 = pre;
+            pre = ans;
+        }
+        return ans;
+    }
+};
+```
+
+# Relation
+- 延伸題：[[213_House Robber II]]
+
+#medium
