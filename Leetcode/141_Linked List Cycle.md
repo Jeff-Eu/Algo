@@ -91,3 +91,6 @@ public class Solution {
     }
 }
 ```
+
+# Relation
+- 進階: [[142_Linked List Cycle II]]

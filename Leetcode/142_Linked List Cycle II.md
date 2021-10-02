@@ -31,6 +31,50 @@ Explanation: There is no cycle in the linked list.
 141 Linked List Cycle 是 Floy's龜兔演算法基本型；而這題是進階型。
 關於該演算法的解說，請參考 [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) 的 markdown file
 
+2021/10/2刷，約45分 包含導公式，以及卡在下面的trap#1
+```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def detectCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if (not head) or (not head.next) or (not head.next.next):
+            return None
+        
+        slw = head.next
+        fst = head.next.next
+
+''' trap#1: 錯誤寫法造成無窮迴圈，fst要從自己的fst開始才是最新的，不能從slw設給它，否則會變成跟之前一樣      
+        while slw != fst:
+            slw = slw.next
+            if slw and slw.next:
+                fst = slw.next
+            else:
+                return None
+'''
+        # 解決 trap#1 的正確解法
+        while slw != fst:
+            slw = slw.next
+            if fst.next and fst.next.next:
+                fst = fst.next.next
+            else:
+                return None
+
+        slw = head
+        while slw != fst:
+            slw = slw.next
+            fst = fst.next
+            
+        return slw
+```
+
 2刷，10分
 ```python 3
 # Runtime: 44 ms, faster than 94.26% of Python3 online submissions for Linked List Cycle II.
@@ -104,3 +148,5 @@ class Solution {
     }
 }
 ```
+
+#medium
