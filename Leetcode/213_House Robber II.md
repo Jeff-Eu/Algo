@@ -85,3 +85,43 @@ class Solution(object):
                 
         return amax
 ```
+
+2021/10/2 c++刷
+```cpp
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int sz = nums.size();
+        if(sz==1)
+            return nums[0];
+        else if(sz==2)
+            return max(nums[0], nums[1]);
+        else if(sz==3)
+            return max(nums[0], max(nums[1], nums[2]));
+        
+        int ans = 0;
+        // The first is selectable
+        int pre2 = nums[0];
+		// 注意這邊容易不小心寫錯
+        int pre = max(nums[0], nums[1]);
+        
+        for(int i=2; i<sz-1; i++) {
+            ans = max(pre2 + nums[i], pre);
+            pre2 = pre;
+            pre = ans;
+        }
+        
+        int ans2 = 0;
+        pre2 = nums[1];
+		// 注意這邊容易不小心寫錯
+        pre = max(nums[1], nums[2]);
+        // The first isn't selectable
+        for(int i=3; i<sz; i++) {
+            ans2 = max(pre2 + nums[i], pre);
+            pre2 = pre;
+            pre = ans2;
+        }
+        return max(ans, ans2);
+    }
+};
+```
