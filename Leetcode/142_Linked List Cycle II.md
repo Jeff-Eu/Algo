@@ -75,6 +75,46 @@ class Solution(object):
         return slw
 ```
 
+C++版本
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        
+        if(head == NULL || head->next == NULL || head->next->next == NULL)
+            return NULL;
+        
+        ListNode* slw = head->next;
+        ListNode* fst = head->next->next;
+        
+        while(slw != fst) {
+            
+            slw = slw->next;
+            if(fst->next != NULL && fst->next->next != NULL)
+                fst = fst->next->next;
+            else
+                return NULL;
+        }
+        
+        slw = head;
+        while(slw != fst) {
+            slw = slw->next;
+            fst = fst->next;
+        }
+        
+        return slw;       
+    }
+};
+```
+
 2刷，10分
 ```python 3
 # Runtime: 44 ms, faster than 94.26% of Python3 online submissions for Linked List Cycle II.
