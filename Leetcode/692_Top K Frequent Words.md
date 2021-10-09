@@ -39,6 +39,12 @@ while i < len(lista):
     i += 1
 ```
 * 要了解 heap 的資料結構，[可以參考這部影片](https://www.youtube.com/watch?v=HqPJF2L5h9U)
+    * full binary tree的高度是 2^(h+1) - 1 , 其中 h 是樹的高度從0開始算
+    * heap 一定要是 complete binary tree
+    * complete binary tree的高是是 log N
+    * insert 跟 delete 一個元素的複雜度都是 O(log N)
+    * insert 全部元素建立出 heap 時間總共是 O(N log N)
+    * delete heap內全部的元素，花的時間總共是 O(N log N)；因為每刪除一個元素可放到尾巴變成 sorted 過的序列，所以全部刪除放到尾巴就會形成一個 sorted array，總共時間就會是 insert all + delete all 的時間，即 2* O(N log N) = O(N log N)
     * heap 可以做出 priority queue
     * heap 雖然是樹的資料結構，但一般都是用陣列來表示，才有快速計算的作用
     * heap 的高度就是比較的次數，可用來計算時間複雜度
@@ -52,22 +58,23 @@ while i < len(lista):
 import collections
 import heapq
 class Solution:
-    # Time Complexity = O(n + nlogk)
-    # Space Complexity = O(n)
+    # Time Complexity = O(MlogM) # M is the number of different words
+    # Space Complexity = O(N)
     def topKFrequent(self, words, k):
         """
         :type words: List[str]
         :type k: int
         :rtype: List[str]
         """
-        # O(n)
+        # O(N)
         count = collections.Counter(words)
         heap = []
-        # O(nlogk)
+        # O(MlogM) # M is the number of different words
         for key, value in count.items():
             heapq.heappush(heap, Word(value, key))
 
         res = []
+		# k * O(logM) # 條件有說不同字的數量 >= k
         for _ in range(k):
             res.append(heapq.heappop(heap).word)
         return res
@@ -86,6 +93,39 @@ class Word:
         return self.freq == other.freq and self.word == other.word
 ```
 
+Kotlin
+```java kotlin
+class Solution {
+    fun topKFrequent(words: Array<String>, k: Int): List<String> {
+        val result = LinkedList<String>()
+
+        val map = HashMap<String, Int>()
+        for (i in words.indices) {
+            if (map.containsKey(words[i]))
+                // https://stackoverflow.com/questions/42705761/kotlin-map-with-non-null-values/42705954
+                map[words[i]] = map.getValue(words[i]) + 1
+            else
+                map[words[i]] = 1
+        }
+        val pq = PriorityQueue<Map.Entry<String, Int>> { a, b ->
+            if (a.value == b.value)
+                a.key.compareTo(b.key)
+            else
+                b.value - a.value
+        }
+        for (entry in map.entries) {
+            pq.offer(entry)
+        }
+        for (i in 1..k)
+            if (!pq.isEmpty())
+                result.add(pq.poll().key)
+
+        return result
+    }
+}
+```
+
+## Not Good
 論譠最hot解(不推，有點脫褲放屁的寫法) (Leetcode也有詳解分析複雜度):
 ```python
 import collections
