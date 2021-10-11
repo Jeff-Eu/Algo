@@ -262,6 +262,7 @@ print jagged5
 * [DefaultDict](https://www.geeksforgeeks.org/defaultdict-in-python/):
     * Defaultdict is a sub-class of the dict class that returns a dictionary object. The functionality of both dictionaries and defualtdict are almost same except for the fact that defualtdict never raises a KeyError. It provides a default value for the key that does not exists.
         ```python
+        from collections import defaultdict
         # Function to return a default 
         # values for keys that is not 
         # present 
@@ -281,6 +282,14 @@ print jagged5
         # 1
         # 2
         # Not Present
+        ```
+    * Next example:
+        ```python
+        from collections import defaultdict
+        # 預設為 0 的 dictionary
+        mp = defaultdict(int)
+        mp["a"] += 3
+        print mp["a"] # 印出3
         ```
 
 ### Dictionary 
