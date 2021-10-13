@@ -53,7 +53,7 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         def dfs(path, st1):
-            if not st:
+            if not st1:
                 ans.append(path)
                 return
             
@@ -69,7 +69,7 @@ class Solution(object):
             
         return ans
 ```
-改良上面，將 set 換成 list 後如下
+改良上面如下(效率差不多)，將 set 換成 list 後，可以不需要在遞迴函式中做複製collection的動作，因為可以利用 List的特性將刪除的元素補回到原來的位置，就不會影響到 iteration 的順序：
 ```python
 # Runtime: 20 ms, faster than 98.25% of Python online submissions for Permutations.
 # Memory Usage: 13.8 MB, less than 18.40% of Python online submissions for Permutations.
@@ -94,8 +94,67 @@ class Solution(object):
             
         return ans
 ```
-不過 insert()及 pop()在 python 的 list 都是 O(N)時間，Python 有可以額外安裝的libary叫作 [blist](https://stackoverflow.com/questions/27073596/what-is-the-cost-complexity-of-insert-in-list-at-some-location/27073672#27073672)，能提供O(logN)時間
+注意上面的 insert()及 pop()在 python 的 list 都是 O(N)時間，Python 有可以額外安裝的libary叫作 [blist](https://stackoverflow.com/questions/27073596/what-is-the-cost-complexity-of-insert-in-list-at-some-location/27073672#27073672)，能提供O(logN)時間
 
+
+Kotlin版本
+```java kotlin
+class Solution {
+    fun permute(nums: IntArray): List<List<Int>> {
+        val ans = mutableListOf<List<Int>>()
+        val path = mutableListOf<Int>()
+        val ls = nums.toMutableList()
+        dfs(path, ls, ans)
+        return ans
+    }
+
+    fun dfs(path: MutableList<Int>, ls: MutableList<Int>, ans: MutableList<List<Int>>) {
+        if (ls.isEmpty()) {
+            ans.add(path)
+            return
+        }
+
+        for (i in ls.indices) {
+            val v = ls.removeAt(i)
+            val pathCopy = path.toMutableList()
+            pathCopy.add(v)
+            dfs(pathCopy, ls, ans)
+            ls.add(i, v)
+        }
+    }
+}
+```
+
+補充: 看到論譠有個 Kotlin版本寫得也不錯，效率較高
+```java kotlin
+class Solution {
+    fun permute(nums: IntArray): List<List<Int>> {
+        val ans =  mutableListOf<List<Int>>()
+        dfs(ans, nums, 0)
+        return ans
+    }
+    fun dfs(ans: MutableList<List<Int>>, nums: IntArray, index: Int): Unit{
+        if (index == nums.size){
+            val ls = mutableListOf<Int>()
+            for (i in 0 until nums.size){
+                ls.add(nums[i])
+            }
+            ans.add(ls)
+            return
+        }
+        for (i in index until nums.size){
+            swap(nums, i, index)
+            dfs(ans, nums, index+1)
+            swap(nums, i, index)            
+        }
+    }
+    fun swap(nums: IntArray, i: Int, j: Int): Unit{
+        val tmp = nums[i]
+        nums[i] = nums[j]
+        nums[j] = tmp
+    }
+}
+```
 
 Solution 2 (harder):\
 Recursive, insert first number anywhere
