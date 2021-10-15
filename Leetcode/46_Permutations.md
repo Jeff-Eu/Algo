@@ -94,7 +94,7 @@ class Solution(object):
             
         return ans
 ```
-注意上面的 insert()及 pop()在 python 的 list 都是 O(N)時間，Python 有可以額外安裝的libary叫作 [blist](https://stackoverflow.com/questions/27073596/what-is-the-cost-complexity-of-insert-in-list-at-some-location/27073672#27073672)，能提供O(logN)時間
+但是上面的 insert()及 pop()在 python 的 list 都是 O(N)時間，Python 有可以額外安裝的libary叫作 [blist](https://stackoverflow.com/questions/27073596/what-is-the-cost-complexity-of-insert-in-list-at-some-location/27073672#27073672)，能提供O(logN)時間
 
 
 Kotlin版本
