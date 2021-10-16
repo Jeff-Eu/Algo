@@ -205,3 +205,9 @@ class Solution(object):
         doit(0, [None]*size)
         return out
 ```
+
+## Relation
+- 進階: [[47_Permutations II]]
+
+
+#medium

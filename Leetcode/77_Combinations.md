@@ -65,6 +65,63 @@ class Solution(object):
         return out
 ```
 
+這次學會在 kotlin下使用 function type做遞迴，降就跟之前寫 Python 常使用的 inner function寫法非常類似！
+```java kotlin
+class Solution {
+    fun combine(n: Int, k: Int): List<List<Int>> {
+
+        var ans = mutableListOf<List<Int>>()
+
+        fun dfs(idx: Int, pick: Int, path: MutableList<Int>) {
+            if (pick == k) {
+                ans.add(path)
+                return
+            }
+
+            for (i in idx..n) {
+                val copyPath = path.toMutableList()
+                copyPath.add(i)
+                dfs(i + 1, pick + 1, copyPath)
+            }
+        }
+
+        dfs(1, 0, mutableListOf())
+        return ans
+    }
+}
+```
+
+也可以將 function type寫成 anonymous function type，但這看起來會比較複雜些，這篇剛好有跟我一樣的實驗結果 - [Recursive anonymus function in kotlin](https://stackoverflow.com/questions/51233329/recursive-anonymus-function-in-kotlin)
+```java kotlin
+class Solution {
+    fun combine(n: Int, k: Int): List<List<Int>> {
+
+        var ans = mutableListOf<List<Int>>()
+        lateinit var dfs: (idx: Int, pick: Int, path: MutableList<Int>) -> Unit
+
+        dfs = myDfs@{ idx: Int, pick: Int, path: MutableList<Int> ->
+            if (pick == k) {
+                ans.add(path)
+                return@myDfs
+            }
+
+            for (i in idx..n) {
+                val copyPath = path.toMutableList()
+                copyPath.add(i)
+                // 注意上面的 dfs 是一個變數，如果前面的 dfs跟初始化合併寫在一起，
+                // 那下面的 dfs就會找不到，因為 dfs變數要被宣告完後面才能用；
+                // 所以寫成前面基本的 function type會是比較安全的作法，也較易懂
+                dfs(i + 1, pick + 1, copyPath)
+            }
+        }
+
+        dfs(1, 0, mutableListOf<Int>())
+        return ans
+    }
+}
+```
+
+
 學習用 18. 4Sum 在遞迴裡的迭代寫法：
 * 定義一個函式叫 comb(nums, k)，其中 nums 代表一個裡面沒重覆的陣列，k是選的數
 * 在遞迴函式裡用 comb(nums[i+1:], k-1) 將答案縮小

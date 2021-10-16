@@ -69,3 +69,40 @@ class Solution(object):
             
         return ans
 ```
+
+Kotlin
+```java kotlin
+class Solution {
+    fun permuteUnique(nums: IntArray): List<List<Int>> {
+        val ans = mutableListOf<List<Int>>()
+        val path = mutableListOf<Int>()
+        val ls = nums.toMutableList()
+
+        fun dfs(path: MutableList<Int>, ls: MutableList<Int>) {
+            if (ls.isEmpty()) {
+                ans.add(path)
+                return
+            }
+
+            val st = mutableSetOf<Int>()
+            for (i in ls.indices) {
+                val v = ls[i]
+                if (v in st)
+                    continue
+                st.add(v)
+                ls.removeAt(i)
+                val pathCopy = path.toMutableList()
+                pathCopy.add(v)
+                dfs(pathCopy, ls)
+                ls.add(i, v)
+            }
+        }
+
+        dfs(path, ls)
+        return ans
+    }
+}
+```
+
+
+#medium
