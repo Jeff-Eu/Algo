@@ -269,5 +269,7 @@ class Solution(object):
 
 ## Relation
 - Floyd's Algorithm -> [[142_Linked List Cycle II]]
+- 標記演算法 -> [[442_Find All Duplicates in an Array]]
+
 
 #medium

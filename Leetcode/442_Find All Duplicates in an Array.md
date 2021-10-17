@@ -34,3 +34,8 @@ class Solution(object):
                 ans.append(ax+1)
         return ans
 ```
+
+## Relation
+- 標記演算法 -> [[287 Find the Duplicate Number]]
+
+#medium
