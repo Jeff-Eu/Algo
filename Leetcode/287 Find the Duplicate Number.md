@@ -1,6 +1,10 @@
 # 287. Find the Duplicate Number
 
-Q: Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is only one duplicate number, find the duplicate one.
+Q: Given an array of integers `nums` containing `n + 1` integers where each integer is in the range `[1, n]` inclusive.
+
+There is only **one repeated number** in `nums`, return _this repeated number_.
+
+You must solve the problem by using only constant extra space.
 
 Example 1:
 
@@ -25,11 +29,14 @@ Output: 3
 
 ## Answer
 
-這題的相似題是 142. Linked List Cycle II，同樣都會使用 Floyd's cycle detection演算法去求得最佳解，這題的詳解用Floyd's演算法解說的還算清楚。
+這題的相似題是 142. Linked List Cycle II，同樣可以使用 Floyd's cycle detection演算法去求得最佳解，這題的詳解用Floyd's演算法解說的還算清楚。
 
 接下來我想用比較學術的方式講解這題，會導出一個猜想定理(因為沒有嚴謹證明才叫猜想)及一個新的演算法。
 
-下圖是參考詳解的方法另外舉一個例子，注意到index 1以後元素的值都不會指向 index 0，而index 0的值因為從>0開始算(此例是3)，所以只會指向後面的元素。若將陣列nums在graph中表示成，陣列中每個idx及其val(val等於`nums[idx]`)都代表node的ID，則在graph中，node idx會指向 node val。
+下圖是參考詳解的方法另外舉一個例子，注意到index 1以後元素的值都不會指向 index 0，而index 0的值因為從>0開始算(最小的可能是1)，所以只會指向後面的元素。若將陣列nums在graph中表示成，陣列中每個idx及其val(val等於`nums[idx]`)都代表node的ID，則在graph中，node idx會指向 node val。
+![287%20Find%20the%20Duplicate%20Number%20639e11310e6042c4866c53b64f9440d0/287_1.png](287%20Find%20the%20Duplicate%20Number%20639e11310e6042c4866c53b64f9440d0/287_1.png)
+
+**假設**：Given an array of integers `nums` containing `n + 1` integers where each integer is in the range `[1, n]` inclusive.
 
 **猜想定理：nums轉換成graph表示後，從node 0出發不斷指向下一個node，最後勢必會產生cycle。**
 
@@ -48,12 +55,12 @@ Output: 3
 
 ![287%20Find%20the%20Duplicate%20Number%20639e11310e6042c4866c53b64f9440d0/287_1.png](287%20Find%20the%20Duplicate%20Number%20639e11310e6042c4866c53b64f9440d0/287_1.png)
 
-我想到一種標記的演算法來解這題，但這標記演算法跟 442. 的標記法不太一樣，但這兩種標記法有一個共同的重要觀念，*標記val 代表的是標記該val的 idx，亦即該 idx的node*，原因是idx不能被標記。
+我想到一種標記的演算法來解這題，但這標記演算法跟 [442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) 的標記法不太一樣，但這兩種標記法有一個共同的重要觀念，*標記val 代表的是標記該val的 idx，亦即該 idx的node*，原因是idx是唯讀的不能被標記，特別要注意，這在程式的回傳值容易寫錯，下面兩個標記法最好是把圖形畫下來搭配著想，輔助對人腦做最有效率的思考。
 
 我的標記法是從graph的node 0開始移動node，下一個node是它指向的，然後將每個尋訪過的node都做標記，標記的方式一樣是乘上-1，當發現有標記過的val就代表該index是重覆的值.
 
 ### Approach 1: Node指向尋訪標記法
-
+Python
 ```python
 # Runtime: 64 ms, faster than 76.99% of Python3 online submissions for Find the Duplicate Number.
 # Memory Usage: 16.5 MB, less than 77.89% of Python3 online submissions for Find the Duplicate Number.class Solution:
@@ -65,26 +72,76 @@ Output: 3
                 nums[pos] *= -1
                 pos = -nums[pos]
             else:
-                return pos
+                return pos # ATTENTION! not nums[pos]
         return -1
+```
+
+Kotlin
+```java kotlin
+class Solution {
+    fun findDuplicate(nums: IntArray): Int {
+
+        var pos = 0
+        while (true) {
+            if (nums[pos] > 0) {
+                nums[pos] *= -1
+                pos = -nums[pos]
+            } else
+                return pos
+        }
+
+        return -1
+    }
+}
 ```
 
 接下來要介紹的是 [442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)的標記法來解本題
 
 ### Approach 2: 陣列尋訪標記法
 
+Python
 ```python
 # Runtime: 48 ms, faster than 99.94% of Python3 online submissions for Find the Duplicate Number.
 # Memory Usage: 16.6 MB, less than 77.89% of Python3 online submissions for Find the Duplicate Number.class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
         for x in nums:
-            ax = abs(x)
+            ax = abs(x) # 注意這邊需取絕對值[註1]
             if nums[ax] > 0:
                 nums[ax] *= -1
             else:
-                return ax
+                return ax # ATTENTION! not nums[ax]
 
         return -1
+```
+
+註1：這個Approach一定要搭配 abs 的函式使用，如果不加abs下面例子就會出錯。建議畫圖並搭配舉例idx/val的陣列來理解。這裡我不好用寫的來輕鬆解釋，覺得拍影片解釋才比較清楚，有兩個關鍵思路如下：
+- nums每一個元素的值都是標記在 idx 從 1 ~ (nums.size - 1)的元素上，當準備要標記已經被標記過的元素，就代表該 idx 就是重覆的值。
+- 一開始 iterate 所有的 nums 可能會遇到負值，所以用 abs；巧妙的是，`nums[abs(x)]`才是上面那點一開始寫的想法，透過它遇到的負值才是代表被標記過的。
+
+```
+idx 0 1 2 3 4
+val 1 3 4 2 2
+```
+
+Kotlin版本：
+```java kotlin
+class Solution {
+    fun findDuplicate(nums: IntArray): Int {
+        
+        var idx = 0
+		// for(v in nums) {
+        //  idx = Math.abs(v)
+        // 下面兩行也可以簡化成上面兩行：
+		for(i in 0 until nums.size) {
+            idx = Math.abs(nums[i])
+            if(nums[idx] > 0)
+                nums[idx] *= -1
+            else
+                return idx
+        }
+        return -1
+    }
+}
 ```
 
 雖然本題若將陣列數字畫成graph，就會像上圖有個出發點node 0，並且在後面某個點開始形成cycle，造成至少有一個node被兩個不同node所指向的cycle，而 Floyd's algorthim 可以解這題。但事實上 Floyd's 演算法還能解從起點開始繞一圈回到起點的graph，這種 graph長得就像操場一樣，所以每個node都只被一個node所指向，這情況 Node標記法 跟 陣列標記法 都不能解決，只能依靠 Floyd's Algorithm。
@@ -209,3 +266,8 @@ class Solution(object):
 
         return None
 ```
+
+## Relation
+- Floyd's Algorithm -> [[142_Linked List Cycle II]]
+
+#medium
