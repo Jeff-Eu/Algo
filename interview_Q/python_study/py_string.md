@@ -3,8 +3,8 @@
     * 字串轉int => `int("28")`
     * int轉字串 => `str(28)`
 * 字元<->數字
-    * 字元轉數字 `ord("c")`
-    * 數字轉字元 `chr(13)`
+    * 字元轉ASCII數字 `ord("A")`
+    * ASCII數字轉字元 `chr(65)` 
 * 字元 c
     * c.isalpha()  # 是字母嗎
     * c.isalnum()  # 是字母或數字嗎
