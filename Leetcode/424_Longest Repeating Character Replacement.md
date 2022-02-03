@@ -35,7 +35,9 @@ The substring "BBBB" has the longest repeating letters, which is 4.
 ## Answer
 [力扣高手有詳細的介紹如何使用移動視窗解題](https://leetcode-cn.com/problems/longest-repeating-character-replacement/solution/tong-guo-ci-ti-liao-jie-yi-xia-shi-yao-shi-hua-don/)
 
-像這類要求最大substring的題目，可以利用所謂「moving window」的概念，moving window從最小的1格開始，從左往右移動；並且在必要時向右擴張，這兩個動作交替進行，moving window勢必會"經過"我們所要的答案，亦即moving window會包含過最大的substring。
+像這類要求最大substring的題目，可以利用所謂「moving window」的概念，moving window從最小的1格開始，右邊向右擴張；並且在必要時左邊向右收縮，等於整個視窗向右移動，這兩個動作交替進行，moving window勢必會"經過"我們所要的答案，亦即moving window會包含過最大的substring。
+
+本題 moving window 需要搭配 hash map 是這題原理的關鍵。
 
 再來這個作法就可分解成兩個部分，何時該向右移動？何時該向右擴張？\
 => 每次會先嘗試做向右擴張的動作，如果向右擴張並不能得到更好的解，就變換成向右移動。
@@ -44,6 +46,7 @@ The substring "BBBB" has the longest repeating letters, which is 4.
 * 因為有k個字元可以變換成相同字元，因此moving window的長度至少有k個
 * 當然還需要一個變數，是存歷史 moving window中，最多重覆的字元
 * 最後的答案就是回傳moving window的size
+* moving window只會向右變大或向右移動，不會變小，因此可以篩選出所有局部極大值，最終找到絕對極大值。
 
 ```python
 class Solution(object):
@@ -64,7 +67,9 @@ class Solution(object):
             mp[s[right]] += 1
             maxDupNum = max(maxDupNum, mp[s[right]])
             # change Extend Right to Move Right if possible
+            # 沒有比這視窗更大的可能，就讓這視窗繼續往右移動，這作法必定能比較所有最大的可能性
             if right-left+1 > maxDupNum+k: 
+                # 小心別寫成 mp[left]
                 mp[s[left]] -= 1
                 left+=1
         
