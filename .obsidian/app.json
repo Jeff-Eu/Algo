@@ -1,5 +1,6 @@
 {
   "foldIndent": false,
   "foldHeading": true,
-  "showLineNumber": false
+  "showLineNumber": true,
+  "lineWrap": false
 }
