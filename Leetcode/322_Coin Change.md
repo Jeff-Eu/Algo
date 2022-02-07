@@ -60,6 +60,52 @@ class Solution(object):
         return dp[amount] if dp[amount] != float('inf') else -1 
 ```
 
+Jeff's Top-Down Approach:
+```python
+# Runtime: 1784 ms, faster than 28.13% of Python online submissions for Coin Change.
+# Memory Usage: 48.7 MB, less than 5.44% of Python online submissions for Coin Change.
+class Solution(object):
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+        if amount == 0:
+            return 0
+        
+        mp = dict()
+        def dfs(remained):
+            if remained in mp:
+                return mp[remained]
+            
+            mi = float('inf')
+            for c in coins:
+                newRemained = remained - c
+                if newRemained > 0:
+                    mi = min(mi, 1 + dfs(newRemained))
+                elif newRemained == 0:
+                    mp[remained] = 1
+                    return 1
+            
+            mp[remained] = mi
+            return mi
+                    
+        ans = dfs(amount)
+        return ans if ans != float('inf') else -1
+    
+'''試著畫圖解釋...(未畫完，只是試著舉例)
+
+        5
+      1 2 5   L
+     4
+   1 2 5       L
+  3
+1 2 5          L
+
+'''
+```
+
 詳解的code：
 ```python
 class Solution(object):
