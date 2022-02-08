@@ -123,3 +123,24 @@ class Solution(object):
                 dp[x] = min(dp[x], dp[x - coin] + 1)
         return dp[amount] if dp[amount] != float('inf') else -1 
 ```
+
+Jeff隔日kotlin刷
+```java kotlin
+class Solution {
+
+    fun coinChange(coins: IntArray, target: Int): Int {
+
+        var arr = IntArray(target + 1) { target + 1 }
+        arr[0] = 0
+        for (c in coins) {
+            for (v in c..target) {
+                arr[v] = minOf(arr[v], arr[v - c] + 1)
+            }
+        }
+        if (arr[target] != target + 1)
+            return arr[target]
+        else
+            return -1
+    }
+}
+```
