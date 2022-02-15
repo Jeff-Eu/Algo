@@ -31,10 +31,12 @@ Operations allowed:
 
 ## Answer
 * 這題使用到 Bézout's identity貝祖定理 https://leetcode.com/problems/water-and-jug-problem/discuss/83715/Math-solution-Java-solution
-	* 推文也有提到一個滿有趣的思路 https://www.youtube.com/watch?v=0Oef3MHYEC0
+	* 推文也有提到一個滿有趣的現象，雖然跟GCD的解法無關
+	 https://www.youtube.com/watch?v=0Oef3MHYEC0 
 
 不過話說回來，雖然用貝祖定理可以解釋 ax+by=m 是否有整數解，但還沒看到有人解釋為何這題倒水的順序用 ax+by=m 的整數解在實際上是可行的。這背後又是一個值得研究的問題 - todo。
 
+另外論譠上也有人用 tree的方式解，應該算是不用到數論，實際操作的寫法，尚未研究 - todo。
 
 ```python
 class Solution(object):
