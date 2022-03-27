@@ -42,6 +42,18 @@ Output: [4]
 
 除了暴力法外還有三種解法，目前已理解兩種, 參考了[力扣這裡的第一種解法-使用heap](https://leetcode-cn.com/problems/sliding-window-maximum/solution/hua-dong-chuang-kou-zui-da-zhi-by-leetco-ki6m/)，一天後重練花13分。
 
+
+引述的其內容稍作修改：
+
+對於本題而言，初始時，我們將數組`(nums[i], i)`的前ķ個元素放入優先隊列中。每當我們向右移動窗口時，我們就可以把一個新的元素放入優先隊列中，此時堆頂的元素就是堆中所有元素的最大值(假設是 max heap)。然而這個最大值可能並不在滑動窗口中，在這種情況下，這個值在數組數字中的位置出現在*滑動窗口左邊界的左側*。因此，當我們後續繼續向右移動窗口時，這個值就永遠不可能出現在滑動窗口中了，我們可以將其永久地從優先隊列中移除。
+
+我們不斷地移除堆頂的元素，直到其確實出現在滑動窗口中。此時，堆頂元素就是滑動窗口中的最大值。
+
+
+補充：代碼裡 heap(即 hp)的size並不一定等於滑動窗口的大小(即 k)，然而在一開始想這題時容易相信heap的size等於k，造成往後的思考都會錯誤而白費。實際上 heap 在這裡是一個被動的角色，它只記錄滑動窗口的最大值，但它的size卻可以比k大，當滑動窗口在移動時，它不會在意又被新增一個數值進去，就得馬上刪除原來滑動窗口最左邊的在heap的值；heap只在乎是否它最大值的index，不再是位在滑動窗口內，就會被動地去觸發，刪除掉最大值的index不是在滑動窗口內的，這動作會一直做下去直到不再被觸發，然後再取一次heap最大值的就是位在滑動窗口內了，至於它是否還有其他元素是在滑動窗口外的那不重要，因為那些都不是當下滑動窗口的最大值；換個說法，這裡heap的每個元素是 `(nums[i], i)`(假設是max heap)，每次元素取出來都會有 index i，我都去檢查 i 是不是在滑動視窗 k 個範圍內，沒有就刪掉，下一次視窗再往右移動也不會再用到那筆早就已經超過範圍被刪掉的元素了. 
+
+心得：想像heap可用來計算一個size為k的小陣列的極值；當這個陣列動態開始左右無限擴張，我們也想計算連續視窗範圍內的極值，原本的小陣列就像滑動視窗一樣，一開始已經有heap計算過，再丟進給它新的元素，只要再一些簡單的計算就能再得到新視窗位置的極值。
+
 Time: O(NlogN), N=len(nums)
 ```python
 # Runtime: 1928 ms, faster than 26.58% of Python online submissions for Sliding Window Maximum.
@@ -73,10 +85,30 @@ class Solution(object):
 
 解法二，單調隊列：
 
-第二種解法是使用 [Monotone Priority Queue](https://en.wikipedia.org/wiki/Monotone_priority_queue)，中文叫單調隊列，[這邊有很清楚的解釋](https://kknews.cc/zh-tw/code/vmnab5q.html)，建議先看過再去理解上面力扣的第二種解法的"Code"(快速掃過解釋因為我覺得他的解釋不是很好)，如果想看動畫來驗證的話，可以[參考這個](https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/)。 
-* 網友說有相關題：
-    * [Medium 59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)：後來我去寫的解法效能很好，也沒用到這方法，所以沒再去研究兩者的關聯。
-    * [Easy 155. Min Stack](https://leetcode.com/problems/min-stack/)
+第二種解法是使用 [Monotone Priority Queue](https://en.wikipedia.org/wiki/Monotone_priority_queue)，中文叫單調隊列，[這邊有不錯的解釋](https://kknews.cc/zh-tw/code/vmnab5q.html)，建議先看過再去理解上面力扣的第二種解法的"Code"(快速掃過解釋因為我覺得他的解釋不是很好)，如果想看動畫來驗證的話，可以[參考這個](https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/)。 
+
+其實從Code看會比較容易明白，要先有個觀念，單調佇列(Monotone Priority Queue)是一種Priority Queue，是以由小到大或是由大到小排序，所以最左邊的都會是極值。
+
+來研究下面寫的code，先看第一組for迴圈，在一開始視窗範圍k個的陣列，是用大至小的單調佇列(q)，每次囊括進新的`nums[i]`檢查，我們想要取最大的，因此保持讓q由大至小排序，要取最大的時候就是拿`q[0]`，其實在塞入`nums[i]`進q之前，要不要把q右邊比`nums[i]`小的pop()掉都沒差，甚至我們可以在不用pop的情況下，用 binary insect `nums[i]`進去q，但問題是insert進去後剩下的元素都要往後推，造成效率不見得比較好。如果在 while裡面的 pop()做最糟的情況，就是把k個元素都pop過一次，那總共是花 2k 的次數，在一開始k個的範圍裡，用暴力法求最大值只要比對 k次反爾更快一點。
+
+接下來看第二段 for迴圈，這裡就會看到 deque的威力，當開始檢查新的元素進來時，依然仿照第一段for迴圈的做法，將後面比 `nums[i]`還小的都 pop掉，再將`nums[i]`丟進去，做法一模一樣，這段變成如下的code：
+```python
+        for i in range(k, size):
+            while q and nums[i] > nums[q[-1]]:
+                q.pop()
+            q.append(i)
+			
+            ans.append(nums[q[0]])
+```
+最後一行就是每次將新的最大值加入到ans的list之中。假設沒有做別的事，這段for迴圈做完加上第一段for總共最差就是做 2N的次數(其中 N=len(nums))，可能會想問，被pop掉的元素有沒有可能是之後加進來的最大值？答案是不可能，因為他們會被pop掉，勢必有比他們大的元素加進來，所以被pop掉的永不會是最大值。
+
+不過最後要再加個小修飾，在for迴圈的倒數第二行插入下面的判斷
+```python
+            if q[0] <= i-k:
+                q.popleft()
+```
+
+很熟悉，沒錯這就是解法一用來篩選掉滑動窗口外的最大值(注意，這裡的滑動窗口指的是題目的滑動窗口，我們的解法一跟解法二，反而都沒那麼像滑動窗口，所以如果一開始就在想*滑動窗口的解法*，可能容易被卡住)，最後取的`q[0]`就是目前視窗內的最大值。
 
 一天後重練花了約12分，但是submit有遇到兩次錯誤，原因是不小心會被它的兩層巢狀陣列結構搞迷糊。
 
@@ -104,6 +136,11 @@ class Solution:
             
         return ans
 ```
+
+* 網友說有相關題：
+    * [Medium 59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)：後來我去寫的解法效能很好，也沒用到這方法，所以沒再去研究兩者的關聯。
+    * [Easy 155. Min Stack](https://leetcode.com/problems/min-stack/)
+
 
 第三種解法是使用 Sparse Table，待研究...
 * Ref:

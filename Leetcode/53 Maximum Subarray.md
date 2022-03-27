@@ -58,6 +58,24 @@ approach, which is more subtle.
     - Facebook, Yahoo, PayPal, M$, LinkedIn
 
 ## Solution
+Kotlin
+```java kotlin
+class Solution {
+    fun maxSubArray(nums: IntArray): Int {
+        
+        val sz = nums.size
+        var mxi = nums[0] // max value of a subarray which ends at index i of nums
+        var ans = nums[0]
+        for(i in 1..sz-1) {
+            
+            mxi = maxOf(mxi+nums[i], nums[i])
+            ans = maxOf(ans, mxi) 
+        }
+        
+        return ans
+    }
+}
+```
 
 Java
 
