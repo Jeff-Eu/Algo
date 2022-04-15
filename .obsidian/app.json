@@ -2,5 +2,6 @@
   "foldIndent": false,
   "foldHeading": true,
   "showLineNumber": true,
-  "lineWrap": false
+  "lineWrap": false,
+  "readableLineLength": false
 }
