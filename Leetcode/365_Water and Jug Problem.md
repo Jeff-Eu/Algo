@@ -36,6 +36,13 @@ Operations allowed:
 
 不過話說回來，雖然用貝祖定理可以解釋 ax+by=m 是否有整數解，但還沒看到有人解釋為何這題倒水的順序用 ax+by=m 的整數解在實際上是可行的。這背後又是一個值得研究的問題 - todo。
 
+而且，這題目還有個問題，因為題目說 "If targetCapacity liters of water are measurable, you must have targetCapacity liters of water contained within one or both buckets by the end."，那貝氏定理的例子是
+
+3x + 4y = 26
+
+兩個桶子加起來也不會大於26
+故題目應再稍作修改
+
 另外論譠上也有人用 tree的方式解，應該算是不用到數論，實際操作的寫法，尚未研究 - todo。
 
 ```python
