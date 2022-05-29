@@ -44,7 +44,7 @@ Operations allowed:
 故題目應再稍作修改
 
 另外論譠上也有人用 tree的方式解，應該算是不用到數論，實際操作的寫法，尚未研究 - todo。
- 
+
 ```python
 class Solution(object):
     def canMeasureWater(self, jug1, jug2, target):
