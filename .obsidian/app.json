@@ -3,5 +3,7 @@
   "foldHeading": true,
   "showLineNumber": true,
   "lineWrap": false,
-  "readableLineLength": false
+  "readableLineLength": false,
+  "legacyEditor": false,
+  "livePreview": true
 }
