@@ -230,6 +230,42 @@ print jagged5
 
 * 有一個list為`[3,7,8,2]`，它的和快速求出：`sum([3,7,8,2])`
 ### Queue
+* [using queue by list](https://www.geeksforgeeks.org/queue-in-python/)
+```python
+# Initializing a queue
+queue = []
+  
+# Adding elements to the queue
+queue.append('a')
+queue.append('b')
+queue.append('c')
+  
+print("Initial queue")
+print(queue)
+  
+# Removing elements from the queue
+print("\nElements dequeued from queue")
+print(queue.pop(0))
+print(queue.pop(0))
+print(queue.pop(0))
+  
+print("\nQueue after removing elements")
+print(queue)
+
+'''output:
+Initial queue
+['a', 'b', 'c']
+
+Elements dequeued from queue
+a
+b
+c
+
+Queue after removing elements
+[]
+'''
+```
+
 * [Official guide for Queue object](https://docs.python.org/2/library/queue.html#queue-objects)
     ```python
     from Queue import Queue
@@ -243,7 +279,7 @@ print jagged5
     # 2 is printed
     print p
     ```
-* 不過最好常使用[deque (double ended queue)](https://pymotw.com/2/collections/deque.html)，這樣就不用額外再去記上面Queue的用法，另外deque有一些原本List(以及所隱含的stack)的操作支援，所以同樣支援index(), remove(), append(), pop(), extend()，但它新增了 popleft(), appendleft(), extendleft()，注意 extendleft()是一個個添加到左邊。
+* 亦可使用[deque (double ended queue)](https://pymotw.com/2/collections/deque.html)，這樣就不用額外再去記上面Queue的用法(但是最方便的還是用list模擬)，另外deque有一些原本List(以及所隱含的stack)的操作支援，所以同樣支援index(), remove(), append(), pop(), extend()，但它新增了 popleft(), appendleft(), extendleft()，注意 extendleft()是一個個添加到左邊。
     * deque 若要當作是純 queue ，那你可以選擇要往左或往右 pop：
         * 往左 pop 的queue: popleft, append
         * 往右 pop 的queue: pop, appendleft 
