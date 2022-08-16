@@ -31,6 +31,35 @@ Constraints:
 0 <= prices[i] <= 10 ^ 4
 
 ## Answer:
+Jeff 3刷 (沒有2刷簡潔)
+```python
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        sz = len(prices)
+        lo = prices[0]
+        hi = prices[0]
+        sm = 0
+        slopeDown = True
+        for i in xrange(1, sz):
+            if slopeDown and prices[i] > prices[i-1]:
+                lo = prices[i-1]
+                slopeDown = False
+            elif slopeDown == False and prices[i] < prices[i-1]:
+                hi = prices[i-1]            
+                sm += hi-lo
+                slopeDown = True
+
+        if slopeDown == False:
+            hi = prices[sz-1]
+            sm += hi-lo
+            
+        return sm
+```
+
 Jeff 2刷
 
 這題要用 local maximum/minum 的觀念去思考，其中程式裡的 up 是代表目前是走向是往上或下
