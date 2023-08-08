@@ -30,7 +30,7 @@ Output: [0,1]
 
 ### Answer
 
-Jeff複刷使用 Hash Table
+Jeff複刷使用 Dictionary
 
 ```python
 # Runtime: 36 ms, faster than 99.18% of Python3 online submissions for Two Sum.
