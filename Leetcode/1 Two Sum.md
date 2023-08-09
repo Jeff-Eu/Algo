@@ -184,6 +184,26 @@ Output: index1 = 1, index2 = 2
 
 Solution
 
+二刷 Dictionary
+```python
+class Solution:
+	# @param A : tuple of integers
+	# @param B : integer
+	# @return a list of integers
+	def twoSum(self, A, B):
+        mp = {}
+        
+        for i, v in enumerate(A):
+            if B-v in mp:
+                return [mp[B-v]+1, i+1]
+            else:
+                if v not in mp:
+                    mp[v] = i
+        return []
+```
+
+
+一刷
 ```python
 class Solution(object):
     def twoSum(self, nums, target):
