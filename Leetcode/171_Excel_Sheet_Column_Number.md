@@ -13,7 +13,28 @@ For example:
     AB -> 28 
 ```
 
-## 思路
+
+## Jeff 個人筆記
+- 若要將字元轉換成unicode數值，可用ord('A')這函式
+- 字串S取得某字元可用index寫法，S[0]即取得第一字元
+## Answer2 (similar)
+
+Jeff 2 刷 (2,3天前先刷完168之後)
+```python
+class Solution:
+    def titleToNumber(self, columnTitle: str) -> int:
+
+        numA = ord('A')
+        out = 0
+        for c in columnTitle:
+            out *= 26
+            out += ord(c) - numA + 1
+
+        return out
+```
+
+## Answer1
+### 思路
 Jeff:\
  這題容易讓人搞混的原因是，它的進位法則不能直接轉換成我們所熟知的N進位法則，我們可以做個小轉換，才能變成熟知的N進位。
 
@@ -77,10 +98,6 @@ ZZZ = Z00 + Z0 + Z = A000 + A00 + A0 = AAA0 = 26^3 + 26^2 + 26^1 + 0
 字母         B    A
 累計值 = 26*2 + 1 = 53
 ```
-## Jeff 個人筆記
-- 若要將字元轉換成unicode數值，可用ord('A')這函式
-- 字串S取得某字元可用index寫法，S[0]即取得第一字元
-## Answer
 
 Leetcode有[高手解](https://leetcode.com/problems/excel-sheet-column-number/discuss/)，JAVA只用三行就解決。
 
