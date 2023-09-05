@@ -230,9 +230,11 @@ print jagged5
 
 * 有一個list為`[3,7,8,2]`，它的和快速求出：`sum([3,7,8,2])`
 ### Queue
-* [using queue by list](https://www.geeksforgeeks.org/queue-in-python/)
+* [using queue by list] 注意雖然使用 list 也可以達到 queue的效果，但效能很差，不推薦使用
+    Ref: https://www.geeksforgeeks.org/queue-in-python/
+
 ```python
-# Initializing a queue
+# simulate a queue by list
 queue = []
   
 # Adding elements to the queue
@@ -283,6 +285,7 @@ Queue after removing elements
     * deque 若要當作是純 queue ，那你可以選擇要往左或往右 pop：
         * 往左 pop 的queue: popleft, append
         * 往右 pop 的queue: pop, appendleft 
+
 ### Set
 * 新增為 add(), 移除可用 remove()或 discard()，都不會回傳，這兩個差別在，如果要移除的元素不在set裡面，discard不會跳 exception，
     ```python
