@@ -270,9 +270,12 @@ Queue after removing elements
 
 * [Official guide for Queue object](https://docs.python.org/2/library/queue.html#queue-objects)
     ```python
-    from Queue import Queue
+    from Queue import Queue # Python 2
+    # import queue          # Python 3
 
-    q = Queue()
+    q = Queue()         # Python 2
+    # q = queue.Queue() # Python 3
+
     q.put(2)
     if not q.empty():
         # q is popped

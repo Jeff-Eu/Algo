@@ -32,11 +32,48 @@ Output: 0
 Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
 ```
 
-## Answer:
+# Answer:
+## 新解(效能較差但易懂)
+來自論譠
+https://leetcode.com/problems/word-ladder/solutions/1764371/a-very-highly-detailed-explanation/
+
+```python (python3)
+import queue
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        st = set(wordList)
+        if endWord not in st:
+            return 0
+
+        q = queue.Queue()
+        q.put(beginWord)
+
+        visited = set()
+        visited.add(beginWord)
+
+        changes = 1
+
+        while not q.empty():
+            sz = q.qsize()
+            for i in range(sz):
+                word = q.get()
+                if word == endWord:
+                    return changes
+                for j in range(len(word)):
+                    for k in range(ord('a'), ord('z')+1):
+                        word2 = word[:j] + chr(k) + word[j+1:]
+                        if (word2 in st) and (word2 not in visited):
+                            q.put(word2)
+                            visited.add(word2)
+            changes += 1
+        return 0
+```
+
+## 初解
 ### 說明：
 這題算是難題，就算一開始想出BFS的解法還不夠，前面有個前處理產生的data還要懂得運用才能讓BFS的效率達到最佳化，好家在Leetcode有提供它的詳解，但詳解還是有些地方沒講清楚，我會補充，這是第一種基本解法；另外詳解提供第二種更厲害的解法，要用到雙向BFS，目前這方法還沒仔細研究，所以只附上第一種基本解法。
 
-首先需要先了解Leetcode詳解裡提到的intermediate word的概念，如果還有點忘記的話，[可以先回去看一下](https://leetcode.com/articles/word-ladder/?page=2)，但有些地方它沒講清楚，我接下來會補充。
+首先需要先了解Leetcode詳解裡提到的intermediate word的概念，如果還有點忘記的話，[可以先回去看一下官方解(英版被拿掉了，故改放中文版)](https://leetcode.cn/problems/word-ladder/solutions/473600/dan-ci-jie-long-by-leetcode-solution/)，但有些地方它沒講清楚，我接下來會補充。
 
 接下來我會將intermediate word用'-'來取代'*'，因為降在紙上寫下來比較容易，也不會被markdown辨識為特殊排版。
 
