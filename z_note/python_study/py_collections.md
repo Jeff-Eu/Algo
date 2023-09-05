@@ -278,8 +278,7 @@ Queue after removing elements
 
     q.put(2)
     if not q.empty():
-        # q is popped
-        p = q.get() 
+        p = q.get() # pop the q (Yes, it's get(). No doubt !!)
 
     # 2 is printed
     print p
