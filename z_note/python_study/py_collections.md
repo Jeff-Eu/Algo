@@ -211,9 +211,23 @@ print jagged5
     * 注意這時候在列舉 dict_count 時，並不會按照count數來排序，但若直接 print dict_count，卻是按照count數來排序，若要按count數descending排序(由大至小)，可用 dict_count.most_common() 這方法，它會回傳一個陣列，並不像 dict_count.items() 只回傳列舉，所以用 most_common() 會很耗效能。
 
 * list sort 的comparer寫法
-    ```python
+    ```python 2
     ...
-    ln = sorted(intervals, cmp=self.compare)
+    def compare(l1, l2):
+        if l1[0] < l2[0]:
+            return -1
+        elif l1[0] > l2[0]:
+            return 1
+        else:
+            return 0
+
+    ln = sorted(intervals, cmp=compare)
+    ```
+    cmp在Python3已經拿掉，Python3的寫法：
+    ```python 3
+    from functools import cmp_to_key
+
+    ln = sorted(intervals, key=cmp_to_key(compare))
 
     def compare(self, l1, l2):
         if l1[0] < l2[0]:
@@ -227,6 +241,9 @@ print jagged5
    ```python
    ln = sorted(intervals, key=lambda x: x[0])
    ```
+* 比較兩個 list 是否為同一物件參照要用`is`；比較他們的內容是否一樣要用`==`
+    ref: [Comparing lists by reference vs value in Python](https://stackoverflow.com/questions/14080970/comparing-lists-by-reference-vs-value-in-python)
+
 
 * 有一個list為`[3,7,8,2]`，它的和快速求出：`sum([3,7,8,2])`
 ### Queue
