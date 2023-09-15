@@ -51,6 +51,89 @@ while i < len(lista):
     * heapify 是將一個non-heap的陣列變成heap，只使用 O(n)的時間；比一個個insert的方法總共要 O(nlogn)的時間還要再快
 
 ## Answer
+
+三刷輔助更佳解 - map + optimized heap  // 看到討論區某人的詳解其中一個解法的標題及它的複雜度後，改良了一下前面的寫法也寫出跟詳解類似的解 - [Reference](https://leetcode.com/problems/top-k-frequent-words/solutions/431008/summary-of-all-the-methods-you-can-imagine-of-this-problem/)
+```python 3
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        
+        mp = collections.Counter(words)
+        hp = []
+
+        for key, value in mp.items():
+            heapq.heappush(hp, Word(key, value))
+            # 在 min heap中只保留 k 個
+            if len(hp) > k:
+                heapq.heappop(hp)
+
+        ans = []
+        while hp:
+            word = heapq.heappop(hp)
+            ans.append(word.name)
+        
+        ans.reverse()
+        
+        return ans
+
+class Word:
+
+    def __init__(self, name, count):
+        self.name = name
+        self.count = count
+
+    def __lt__(self, other):
+        if self.count == other.count:
+            return self.name > other.name
+        else:
+            return self.count < other.count
+
+    def __eq__(self, other):
+        return (self.count == other.count) and (self.name == other.name)
+```
+Time Complexity: O(nlogK), logK time for each word
+Space Complexity: O(K), since the largest number of words in our minheap is K.
+
+\
+\
+三刷輔助刷 - map + heap // 比上面的差一些，但觀念類似。
+```python 3
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        
+        mp = collections.Counter(words)
+        hp = []
+
+        for key, value in mp.items():
+            # 注意 heappush的預設是 min heap，但我們想由多至少取出，所以 Word 的 class要小心設計
+            heapq.heappush(hp, Word(key, value))
+
+        ans = []
+        for _ in range(k):
+            word = heapq.heappop(hp)
+            ans.append(word.name)
+
+        return ans
+
+class Word:
+
+    def __init__(self, name, count):
+        self.name = name
+        self.count = count
+
+    def __lt__(self, other):
+        if self.count == other.count:
+            # 再來，同樣次數下，字母順序小的也是先取出，這點依然沒變
+            return self.name < other.name
+        else:
+            # 首先，為了讓次數最多的在 min heap下看起來是最小的，所以將比較符號反過來
+            return self.count > other.count
+
+    def __eq__(self, other):
+        return (self.count == other.count) and (self.name == other.name)
+```
+Time Complexity: O(nlogn + klogn) = O(nlogn), where n is words' number
+Space Complexity: O(n), for heap
+
 二刷輔助刷(推)
 ```python
 # Runtime: 40 ms, faster than 82.13% of Python online submissions for Top K Frequent Words.

@@ -209,6 +209,7 @@ print jagged5
     ```
 * 若`words`是一個List，則`dict_count = collections.Counter(words)`可用來計數相同的值各有幾個，將它們存在一個字典, `dict_count`
     * 注意這時候在列舉 dict_count 時，並不會按照count數來排序，但若直接 print dict_count，卻是按照count數來排序，若要按count數descending排序(由大至小)，可用 dict_count.most_common() 這方法，它會回傳一個陣列，並不像 dict_count.items() 只回傳列舉，所以用 most_common() 會很耗效能。
+    * 最安全推薦的方式，則是搭配 heapq的 heap，將 `dict_count`的data按照出現頻率來取出，但因為 heapq預設是 min heap，要小心比較的寫法，詳情可以參考 Leetcode-692。
 
 * list sort 的comparer寫法
     ```python 2
