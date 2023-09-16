@@ -15,6 +15,31 @@ Note:
 The vowels does not include the letter "y".
 
 ## Answer:
+Jeff 複刷
+```python 3
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        
+        vowels = "aeiouAEIOU"
+
+        # stack
+        stk = []
+
+        for c in s:
+            if c in vowels:
+                stk.append(c)
+        
+        ls = []
+        for c in s:
+            if c in vowels:
+                ls += [stk.pop()]
+            else:
+                ls += [c]
+
+        return ''.join(ls)
+```
+
+
 Jeff's
 用兩個指標head跟tail，分別從最前面及最後面往另一方向找母音，兩者都找到的時候就做互換，如此再繼續找下一對做互換。
 ```python
