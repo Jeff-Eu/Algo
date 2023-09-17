@@ -19,6 +19,23 @@ Explanation:
 ```
 
 ## Answer
+Jeff 複刷
+```python 3
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        
+        mpS = collections.Counter(s)
+        mpT = collections.Counter(t)
+
+        for k, v in mpT.items():
+            if k in mpS:
+                if mpS[k] != v:
+                    return k
+            else:
+                return k
+        return None
+```
+
 [高手解](https://leetcode.com/problems/find-the-difference/discuss/86881/Python-solution-which-beats-96)
 * 因為 xor 跟 + 運算子一樣，具有交換律及結合律，所以可以這樣做
 ```python
@@ -63,7 +80,7 @@ class Solution(object):
         return None
 ```
 
-學平's
+學平's (Great !)
 
 * 要算出兩字串間多出的那個字元是什麼
 * 個別把字串的每個字元轉成ascii code再加總起來
