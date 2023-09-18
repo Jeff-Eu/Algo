@@ -30,6 +30,46 @@ Explanation: The smallest value is 2, but there isn't any second smallest value.
 ```
 ## Answer
 
+Jeff複刷 BFS\
+我這寫法只有在遇到與根節點相同值的子節點才會丟進去Queue裡繼續搜尋，效率較高。
+```python 3
+import queue
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def findSecondMinimumValue(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        q = queue.Queue()
+        q.put(root)
+        m = math.inf
+        while not q.empty():
+            p = q.get()
+            lp = p.left
+            rp = p.right
+            if lp:
+                if lp.val == p.val:
+                    q.put(lp)
+                elif lp.val > p.val:
+                    m = min(m, lp.val)
+                
+                if rp.val == p.val:
+                    q.put(rp)
+                elif rp.val > p.val:
+                    m = min(m, rp.val)
+                
+        if m != math.inf:
+            return m
+        else:
+            return -1
+```
+
 Jeff's (DFS)
 ```python
 # Definition for a binary tree node.

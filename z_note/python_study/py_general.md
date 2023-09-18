@@ -71,6 +71,10 @@
     max = sys.maxsize
     min = -sys.maxsize -1
     ```
+    (僅在 Python 2； [Python 3移除了int最大值的限制](https://stackoverflow.com/questions/9860588/maximum-value-for-long-integer/9860611#:~:text=maxint%20The%20largest%20positive%20integer,of%202's%20complement%20binary%20arithmetic.))
+* float最大值 float("inf") ；最小值 float("-inf")
+* Python 3 是使用 math.inf 與 -math.inf (int, float都適用)
+    * ref: https://stackoverflow.com/questions/13795758/what-is-sys-maxint-in-python-3
 * Python若要算出x的y次方，除了可以import math來使用math.pow(x,y)之外，也可以用x**y的快速寫法
 
 ## Misc

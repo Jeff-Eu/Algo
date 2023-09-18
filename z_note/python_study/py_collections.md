@@ -295,6 +295,7 @@ Queue after removing elements
     # q = queue.Queue() # Python 3
 
     q.put(2)
+    # 注意不能寫成 if q:
     if not q.empty():
         p = q.get() # pop the q (Yes, it's get(). No doubt !!)
 
