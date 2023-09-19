@@ -36,6 +36,42 @@ Constraints:
 * You may assume k is always valid, 1 ≤ k ≤ BST's total elements.
 
 ## Answer
+Jeff複刷 (用到BST的性質)
+```python 3
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+
+        # Using L-V-R of DFS to traverse the BST, so the order of traversal can go from minimum to maximum.
+        def dfs(node):
+            if not node:
+                return
+
+            if count[0] == k:
+                return
+
+            dfs(node.left)
+
+            count[0] += 1
+            if count[0] == k:
+                ans[0] = node.val
+                return
+            
+            dfs(node.right)
+
+        count = [0]
+        ans = [-1]
+        dfs(root)
+
+        return ans[0]
+```
+
+
 Jeff's first solution
 ```python
 import heapq
