@@ -37,6 +37,35 @@ Follow up:
 ## Answer
 還有binary search結合DP的最佳解方法還沒理解
 
+解答:
+
+Solution 1: Dynamic Programming
+
+This is a classic Dynamic Programming problem.
+Let dp[i] is the longest increase subsequence (LIS) of nums[0..i] which has nums[i] as the end element of the subsequence.
+
+注意，上面的陳述，並非代表 dp[i] 就是 nums[0..i] 中的 LIS，因為有可能存在的 LIS 並非是以 nums[i] 作為 subsequence的結尾；所以下面的源碼才會回傳 max(dp)，而非 dp[-1]
+
+就算有上面提示，直接看code還是不易理解它的做法，先看看下面這影片教學，大概看不到一半就能理解並自己實作了
+https://www.youtube.com/watch?v=fV-TF4OvZpk&t=1s
+
+```python 3
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+            
+        sz = len(nums)
+        dp = [1]*sz
+        for i in range(1, sz):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j]+1)
+
+        return max(dp)
+```
+
+
+舊刷記錄:
+
 以下是單純DP解
 dp[i] represents the length of the longest increasing subsequence on an array from index 0 to i, ALSO ! the subsequence must end with index i.
 
