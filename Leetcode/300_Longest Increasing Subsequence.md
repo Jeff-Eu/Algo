@@ -94,3 +94,6 @@ class Solution(object):
             
         return amax  
 ```
+
+## Relation
+- 進階: [[673_Number of Longest Increasing Subsequence]]
