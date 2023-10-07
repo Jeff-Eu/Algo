@@ -37,6 +37,28 @@ for (int i = 0; i < len; i++) {
 }
 ```
 ## Answer
+Jeff 覆刷, 下面是比較單純的方法。其他還有想到的方法是用一個變數指向目前該更新的位置index，另外再用一個變數暫存目前最近更新過的數值，用來判斷避免跟它重覆。
+```python 3
+'''
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+'''
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        
+        arr = [nums[0]]
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i-1]:
+                arr.append(nums[i])
+
+        k = len(arr)
+        for i in range(k):
+            nums[i] = arr[i]
+
+        return k
+```
+
+
 Jeff's
 ```python
 class Solution(object):
