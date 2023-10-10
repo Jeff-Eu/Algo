@@ -23,6 +23,25 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
 ```
 ## Ans
+複刷 - DP
+
+解釋:
+* 倒數第二個元素的英文 - second-to-last element
+* 先解釋dp公式再解釋程式是保險牌
+* 因為我用的dp陣列不是儲存從 1~n 的全部資料，而是只存兩個元素，這會在解釋上相對較困難
+    `ways of k steps = (ways of k-1 steps) + (ways of k-2 steps)`
+```python 3
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        
+        arr = [0, 1, 1]
+
+        for i in range(2, n+1):
+            arr = [arr[-1], arr[-1]+arr[-2]]
+
+        return arr[-1]
+```
+
 jeff's
 ```python
 class Solution(object):

@@ -21,6 +21,26 @@ Explanation: F(3) = F(2) + F(1) = 1 + 1 = 2.
 
 
 ## Answer
+4刷 - DP
+```python 3
+'''
+Runtime
+    Beats 98.04% of users with Python3
+Memory
+    Beats 78.71% of users with Python3
+'''
+class Solution:
+    def fib(self, n: int) -> int:
+
+        dp = [0, 1]
+
+        for i in range(2, n+1):
+            dp.append(dp[i-1] + dp[i-2])
+
+        return dp[n]
+```
+
+
 3刷使用 [Python 3 libary裡的cache (Python 2沒有)](https://docs.python.org/3/library/functools.html#)，但發現用在 [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/) 會有 bug，還不曉得原因。
 
 ```python
