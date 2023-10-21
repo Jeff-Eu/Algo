@@ -17,7 +17,32 @@ Output: 4
 
 看詳解的圖就很容易回想起來，或是看[這影片的教學，特別是在影片19:50的地方](https://www.youtube.com/watch?v=FO7VXDfS8Gk)
 
+## 英文補充
+* This can be easier to depict by drawing.
+*
+
 ## Answer
+Jeff 覆刷(看過前面的影片後)
+```python 3
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        h = len(matrix)
+        w = len(matrix[0])
+        
+        arr = [[0] * w for _ in range(h)]
+        ans = 0
+        for i in range(h):
+            for j in range(w):
+                if i==0 or j == 0:
+                    arr[i][j] = int(matrix[i][j])
+                elif matrix[i][j] != '0':
+                    arr[i][j] = min(arr[i-1][j], arr[i][j-1], arr[i-1][j-1]) + 1
+
+                ans = max(arr[i][j], ans)
+
+        return ans * ans
+```
+
 Jeff's 一刷(較易懂)
 ```python
 class Solution(object):
