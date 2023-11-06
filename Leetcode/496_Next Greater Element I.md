@@ -35,6 +35,59 @@ Return _an array_ `ans` _of length_ `nums1.length` _such that_ `ans[i]` _
 
 ## Answer
 
+複刷 - 這裡的重要觀念是使用到 Monostack，忘記的話[這5分多鐘的影片](https://www.youtube.com/watch?v=Dq_ObZwTY_Q)有滿清楚的解釋，
+需要注意的是影片一開始的說明是從左依序循訪到右，但這在實作上除了會需要原本的Stack，"可能"還會需要使用dictionary(亦稱作map)的key/value的輔助去分別儲存 原本list的值/greater的值，亦即 list[i]/ans[i]；但若是從後面循訪至前面，就可以只用 Stack作輔助，相對來說時間空間都可以再節省。
+先來一個範例，
+```txt
+4 2 3 7 5 1 4 6
+```
+無論是從那個方向循訪，使用的都是decreasing monostack，所以只需要注意取值的時候作法會不同，若是從開始到結束的循訪，每個元素的greater元素就會是把它pop out的元素，像上面的例子就是 7把3,2,4都 pop out，所以7會是他們的greater元素；
+若是從右到左循訪，每個元素的greater元素就會是stack pop完之後，最後要push之前在stack上的top元素，可以用上面的例子自行模擬即明白。
+
+回歸本題，這裡的需求跟影片的情形有一點不同，但基本觀念一樣，使用到decreasing monostack。
+
+```python 3
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        
+        sz = len(nums2)
+        
+        mp = dict()
+        stack = []
+        gs = [-1]*sz # greater list
+        
+        for i in range(sz):
+            mp[nums2[i]] = i
+        
+        for i in range(sz-1, -1, -1):
+            while stack:
+                if nums2[i] < stack[-1]:
+                    gs[i] = stack[-1]
+                    break
+                else:
+                    stack.pop()
+                    
+            stack.append(nums2[i])
+            
+        ans = []
+        for v in nums1:
+            ans.append(gs[mp[v]])
+
+        return ans        
+        
+'''example for explaination
+
+4 2 3 7 5 1 4 6 original list
+7 3 7 - - 4 6 - greater list
+
+stack
+7 5 6 
+
+'''
+```
+
+-------------------
+
 Jeff's first approach (not optimum solution but passed)
 ```cpp
 /*
