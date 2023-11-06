@@ -181,9 +181,11 @@ print jagged5
 
 * [How do I check if a list is empty?](https://stackoverflow.com/questions/53513/how-do-i-check-if-a-list-is-empty)
     ```python
-    if not a:
+    if not ls:
         print("List is empty")
     ```
+    * python中 list 本身就具備 stack 性質
+    * 注意不能用 ls.empty()來確認是否 ls 為 empty；只有 Queue() 有 empty() 的 function
 * [Is there a short contains function for lists?](https://stackoverflow.com/questions/12934190/is-there-a-short-contains-function-for-lists)
     ```python
     if myItem in list:
