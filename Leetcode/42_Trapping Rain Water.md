@@ -11,12 +11,10 @@ Output: 6
 ``` 
 
 ## Answer
-Leetcode有附詳解，分成三階段進化方法(還沒看過並先忽略stack的方法)，彼此都有相關。
+DP 解(易理解)看完下面影片後試刷 (beat only 5%)
 
-先參考下面連結影片很清楚的介紹Leetcode第二階段的DP解(只要看完這階段的解就好)
+參考下面連結影片很清楚的介紹Leetcode 的DP解(從開始看到 7:13 就好)
 https://www.youtube.com/watch?v=8BHqSdwyODs
-
-第二段解(易理解)看完後之試刷 (beat only 5%)
 ```python
 class Solution(object):
     def trap(self, height):
@@ -45,8 +43,48 @@ class Solution(object):
         
         return sum(arr)
 ```
+Time & Space 都是 O(n)
+
+//-------------
+
+使用 MonoStack 的方法
+
+可以先看這印度影片的動畫解釋，雖然沒有解釋得很完整，不過可以掌握一部分精髓；注意若是高度為0，也是有可能入棧(push to stack)。並且可以注意到，每次計算的水量是一列一列累計的，跟前面DP的作法是一行一行累計的有所不同。
+https://youtu.be/EdR3V5DBgyo?t=365
+
+接下來看比較完整的解釋是中文力扣的解釋方法，中文力扣才有免費詳解，不過它的解釋大多看起來比較像是程式碼的用pseudo-code的方式還原，所以不建議第一次看，會比較難理解。可以試著模擬stack已存在2個以上的值，而將要入棧一個較高的牆，其下標是i，就會將他們分別出棧並且最後再入棧i，每次出棧的過程都會累計水量
+https://leetcode.cn/problems/trapping-rain-water/solutions/692342/jie-yu-shui-by-leetcode-solution-tuvc/
+
+![Alt text](imgs\42_monostack.png)
+
+看完詳解後試刷
+```python 2
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        
+        stack = [0]
+        
+        sz = len(height)
+        ans = 0
+        for i in range(1, sz):
+            
+            while stack and height[i] > height[stack[-1]]:
+                top = stack.pop()            
+                if stack: # stack is not empty
+                    w = i-stack[-1]-1
+                    h = min(height[i], height[stack[-1]]) - height[top]
+                    ans += w*h
+        
+            stack.append(i)
+
+        return ans
+```
+Time & Space 都是 O(n)
+
+//--------------
+
 最好的方法是使用Two Pointers。
-Jeff看完第三段解後一刷 (beat 92.92%):
+Jeff看完這解後一刷 (beat 92.92%):
 ```python
 class Solution(object):
     def trap(self, height):
@@ -71,3 +109,5 @@ class Solution(object):
                 
         return ans
 ```
+
+Time O(n), Space O(1)
