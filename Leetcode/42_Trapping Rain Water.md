@@ -111,3 +111,8 @@ class Solution(object):
 ```
 
 Time O(n), Space O(1)
+
+//----------
+
+若想再挑戰 monostack 的問題，這有列表
+https://leetcode.com/tag/monotonic-stack/
