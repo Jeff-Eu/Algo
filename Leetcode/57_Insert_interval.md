@@ -18,6 +18,33 @@ Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
 
 # Answer
+複刷 (運用第56題的方法)
+```python
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        """
+        :type intervals: List[List[int]]
+        :type newInterval: List[int]
+        :rtype: List[List[int]]
+        """
+        intervals.append(newInterval)
+        
+        intervals.sort(key=lambda a:a[0])
+        ans = []
+        for part in intervals:
+            if not ans:
+                ans.append(part)
+            else:
+                if ans[-1][1] >= part[0]:
+                    ans[-1][1] = max(ans[-1][1], part[1])
+                else:
+                    ans.append(part)
+                    
+        return ans
+```
+
+
+----
 注意這裡必學三個重要定理，就是如何判斷兩時段是否有交集，以及如何取得交集及聯集，這會在進階版區間問題 253. Meeting Rooms II 應該會很有幫助。
 
 [以下改自力扣官方解](https://leetcode-cn.com/problems/insert-interval/solution/cha-ru-qu-jian-by-leetcode-solution/):
