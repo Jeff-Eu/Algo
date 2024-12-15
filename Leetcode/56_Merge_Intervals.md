@@ -16,12 +16,12 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 ```
 NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
 
+## Answer
 
 * 先對interval array依照start由小到大做排序
 * 取interval array第一筆的start、end屬性
 * 跑迴圈去比較是否有重疊
 
-## Answer
 c++參考首刷
 ```cpp
 // Runtime: 8 ms, faster than 99.93% of C++ online submissions for Merge Intervals.

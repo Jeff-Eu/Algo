@@ -8,8 +8,8 @@
             ctr = [0]
         ```
     * 參見
-        * [Python nested functions variable scoping](https://stackoverflow.com/questions/5218895/python-nested-functions-variable-scoping/13277359#13277359)
         * [UnboundLocalError with nested function scopes](https://stackoverflow.com/questions/2609518/unboundlocalerror-with-nested-function-scopes/2609593#2609593)
+        * [Python nested functions variable scoping](https://stackoverflow.com/questions/5218895/python-nested-functions-variable-scoping/13277359#13277359)
 * Default parameters, ex:
     ```python
     def backtrack(s = "Hello", n = " World"):

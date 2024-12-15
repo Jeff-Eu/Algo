@@ -40,7 +40,7 @@ print jagged1
 
 # jagged2 Wrong !
 print "jagged2:"
-jagged2 = []*5
+jagged2 = []*5 # 問題出在這，降子的寫法印出來只得到 []
 for _ in jagged2:
     jagged2.append([])
 print jagged2
@@ -53,7 +53,7 @@ runtime exception
 
 # jagged3 Wrong !
 print "jagged3:"
-jagged3 = []*5
+jagged3 = []*5 # 問題出在這，降子的寫法印出來只得到 []
 print jagged3
 
 for i in jagged3:
@@ -79,7 +79,7 @@ print jagged4
 jagged4[0].append(1)
 print jagged4
 
-'''output jagged 4
+'''output jagged 4 (兩個分開的array；不是一個)
 [[], [], [], [], []]
 [[1], [], [], [], []]
 '''
@@ -166,6 +166,7 @@ print jagged5
     foo
     # No copy is created, the elements are reversed on the fly while traversing! This is an important feature of all these iteration functions (which all end on “ed”).
     # e.g. sort vs sorted, reverse vs reversed (有加ed的是回傳新創建的，沒加ed的是修改原本的)
+    # 記法: 平常最熟悉的操作就是 ls.sort()，它就是修改原本的；跟過去在寫Java時可能會以為它會回傳一個新的，然後傳入參數的sorted(ls)習慣是改舊的的用法不同。
     ```
 * [list reverse 的三種方式](https://dbader.org/blog/python-reverse-list)
 - 關於 list 插入到最後的寫法

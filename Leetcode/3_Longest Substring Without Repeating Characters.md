@@ -33,6 +33,38 @@ s consists of English letters, digits, symbols and spaces.
 ```
 
 ## Answer
+理解第一刷後的第三刷：
+Time: O(N)
+
+其實下面的解法很適合做動畫來解說這題，這動畫會是一個橫躺的彈簧，一開始在s[0]的位置，長度為1，然後由左往右伸縮前進
+
+```python
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        hsh = set()
+        start = end = 0
+        sz = len(s)
+        ans = curr = 0
+        
+        while end < sz:
+            if s[end] not in hsh:
+                hsh.add(s[end])
+            else:
+                while s[start] != s[end]:
+                    hsh.remove(s[start])
+                    start += 1
+                    curr -= 1
+                start += 1
+                curr -= 1
+            curr += 1
+            ans = max(ans, curr)
+            end += 1
+        return ans
+```
 複刷，雙HashSet作法：
 
 使用兩個HashSet分別存jv及kv，這方法在跑第二個迴圈判斷第二跟第三個值時(jv跟kv)，不能像雙指標的方法檢查 `nums[j] == nums[j-1]`就跳出，因為在第二個迴圈 pick值時，該值可以當作是jv或kv；選的值不僅能當作jv，若它也能讓三者之和等於target，就可以當作kv；不像雙指標法jv就是jv，且kv就是kv是各別分開的。

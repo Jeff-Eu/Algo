@@ -22,6 +22,7 @@ Note:
 The input string length won't exceed 1000.
 
 ## Answer
+
 前一晚看懂詳解的方法後，今早嘗試自己刷，但超過40分還是一直有錯誤，下面是大概花了一小時候成功的寫法(不建議)。
 ```python
 class Solution(object):
@@ -52,11 +53,13 @@ class Solution(object):
         return count
 ```
 
-去看詳解的 Approach #3: Expand Around Possible Centers ，就能比較快回想起來較好的解法。
+去看詳解的 Approach - Expand Around Possible Centers ，就能比較快回想起來較好的解法。
 
-複雜度: O(N^2)
+![](imgs/647_1.png)
 
 其實上面的寫法不好，測驗時容易出包，後來瞄了一下詳解的寫法，它是另外再寫一個函式就能同時處理 Odd 跟 Even 的情況，然後我又再用類似的方法重寫一次，結果是花了十分鐘寫出。
+
+複雜度: O(N^2)
 
 ```python
 # Runtime: 100 ms, faster than 89.63% of Python online submissions for Palindromic Substrings.

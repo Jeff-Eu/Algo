@@ -20,6 +20,8 @@ Jeff's 3rd practice (Cleaner than before)
 這次的練習有在時限內說明並解出，心境上要調整到正面積極及信心的狀態，就能消除不必要的緊張感，過程中也不要去理會周遭的雜訊。
 
 這次的解法比之前都更乾淨，一開始本來寫起來滿累贅的，出現很多重覆code，但並不是亂寫，寫到後面開始有refactor作法的靈感，就開始重寫後變成下面精簡的code。
+
+注意，題目的圖用箭頭將每個值連起來，看起來會以為是 Linked List的順序，其實不是！這是陷阱！當它寫`given two non-empty linked lists representing two non-negative integers`，就要推測 243 存的順序是 3->4->2
 ```python
 # Definition for singly-linked list.
 # class ListNode(object):

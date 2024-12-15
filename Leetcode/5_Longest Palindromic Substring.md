@@ -26,6 +26,80 @@ Output: "a"
 ```
 
 ## Answer
+看過再複刷:
+```python
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        ans = ""
+        mxNum = 0
+        sz = len(s)
+        
+        def getMaxPalAt(lt, rt):
+            out = ""
+            while lt >=0 and rt < sz:
+                if s[lt] == s[rt]:
+                    out = s[lt:rt+1]
+                    lt -= 1
+                    rt += 1
+                else:
+                    break
+            return out
+        
+        for i in xrange(sz):
+            ans = max(getMaxPalAt(i, i), ans, key=len) # 套用了這裡的 key=len之後，會回傳前面參數裡 len最大的參數
+            
+        for i in xrange(sz-1):
+            ans = max(getMaxPalAt(i, i+1), ans, key=len)
+            
+        return ans
+```
+修改上面再復刷如下，代碼有點醜，不適合考試
+```python
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        # 注意下兩行，是如何 初始化 global變數，來給 nest function使用，請參見 [UnboundLocalError with nested function scopes](https://stackoverflow.com/questions/2609518/unboundlocalerror-with-nested-function-scopes/2609593#2609593)
+        ans = [""]
+        amxLen = [0]
+        
+        sz = len(s)
+        
+        def getMaxPalAt(lt, rt):
+            if lt == rt:
+                llen = 1 # llen is local length for s[lt:rt+1]
+            else:
+                if s[lt] == s[rt]:
+                    llen = 2
+                else:
+                    llen = 0
+            out = ""
+            while lt >=0 and rt < sz:
+                if s[lt] == s[rt]:
+                    if llen > amxLen[0]:
+                        amxLen[0] = llen
+                        ans[0] = s[lt:rt+1]
+                    lt -= 1
+                    rt += 1
+                    llen += 2
+                else:
+                    break
+        
+        for i in xrange(sz):
+            getMaxPalAt(i, i)
+            
+        for i in xrange(sz-1):
+            getMaxPalAt(i, i+1)
+            
+        return ans[0]
+```
+---------
 複刷：目前較好理解跟實作出來的作法，用到 647. Palindromic Substrings 的函式技巧
 
 python

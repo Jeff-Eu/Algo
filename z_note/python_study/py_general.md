@@ -126,7 +126,11 @@
     * list => ls
     * heap => hp
     * sorted(arr) => sorArr
-    * set => st (不要用 _set，因為在hackrank會被視為keyword的顏色)
+    * set => hsh (不要用 _set，因為在hackrank會被視為keyword的顏色)
+    * left => l
+    * right => r
+    * start index => st
+    * end index => ed
     * dict/map => mp (Python 有一個 map()函式，跟dictionary無關，所以不要用 map 當 keyword 否則衝到)
     * height/width => h, w
     * adjacent list => adj
