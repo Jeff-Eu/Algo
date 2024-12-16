@@ -26,8 +26,9 @@ board and word consists only of lowercase and uppercase English letters.
 
 ## Answer
 複刷 
-實用小技巧：        h = len(board)
-        w = len(board[0])
+實用小技巧：        
+    h = len(board)
+    w = len(board[0])
 ```python
 class Solution(object):
     def exist(self, board, word):
